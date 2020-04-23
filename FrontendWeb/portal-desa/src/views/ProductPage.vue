@@ -1,6 +1,7 @@
 <template>
     <div>
         <h1>Data Produk : </h1>
+        <router-link to="/createProduk"><button class="btn btn-primary">Create produk</button></router-link>
         <b-row class="">
             <li v-for="produk in produk" :key="produk.sku">
                 {{produk.nama}}
@@ -10,7 +11,7 @@
                     <p>{{produk.deskripsi}}</p>
                     <p>{{produk.namaDesa}}</p>
                     <b-img rounded=""
-                           src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Kecamatan_Balige%2C_Toba_Samosir_02.jpg"
+                           src="assets/kec.jpg"
                            fluid></b-img>
                 </b-col>
             </li>
@@ -40,6 +41,12 @@
         },
         methods: {
             async load() {
+                if(localStorage.getItem('token')){
+                    console.log("ada")
+                }else{
+                    alert("Anda Belum login")
+                    this.$router.push({name: 'Login'})
+                }
                 const response = await axios.get('http://localhost:9000/produk/')
                 this.produk = response.data
             }

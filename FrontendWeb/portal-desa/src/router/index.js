@@ -5,6 +5,7 @@ import DesaPage from "../views/DesaPage";
 import ProductPage from "../views/ProductPage";
 import JloginPage from "../views/JloginPage";
 import JregisterPage from "../views/JregisterPage";
+import CreateProdukForm from "../views/form/CreateProdukForm";
 
 Vue.use(VueRouter);
 
@@ -13,6 +14,11 @@ const routes = [
     path: "/",
     name: "Home",
     component: JhomePage
+  },
+  {
+    path: "/createProduk",
+    name: "createProduk",
+    component: CreateProdukForm
   },
   {
     path: "/register",

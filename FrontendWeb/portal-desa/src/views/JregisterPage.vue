@@ -165,14 +165,9 @@
                         password : this.password,
                         confirmPassword : this.confirmPassword,
                         role : "ROLE_USER"
-                    })
-                        .then(function (response) {
-                            currentObj.output = response.data;
-                            if(response.data.accessToken){
-                                console.log("Register Success")
-                            }
-                            this.$router.replace({name: 'Login'})
-                        })
+                    }).then(
+                            this.$router.push({name: 'Login'})
+                        )
                         .catch(function (err) {
                             currentObj.output = err;
                         });
