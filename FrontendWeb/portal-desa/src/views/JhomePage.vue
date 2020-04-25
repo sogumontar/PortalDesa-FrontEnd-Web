@@ -8,17 +8,24 @@
             </b-col>
         </b-row>
         <hr>
-        <b-row class="">
-<!--            <li >-->
-<!--                {{kecamatan.nama}}-->
+        <div right>
+            <b-row v-if="authenticated" class="">
+                    <b-col cols="12" col lg="4" sm="12" md="6" class="p-4" v-for="kecamatan in kecamatan.slice(batasbawah, batasatas)" :key="kecamatan.sku">
+                        <router-link  :to="'/detailKecamatan/'+kecamatan.nama"><h5>{{kecamatan.nama}}</h5></router-link>
+                        <b-img rounded=""
+                               src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Kecamatan_Balige%2C_Toba_Samosir_02.jpg"
+                               fluid></b-img>
+                    </b-col>
+            </b-row>
+            <b-row v-else class="">
                 <b-col cols="12" col lg="4" sm="12" md="6" class="p-4" v-for="kecamatan in kecamatan.slice(batasbawah, batasatas)" :key="kecamatan.sku">
                     <h5>{{kecamatan.nama}}</h5>
                     <b-img rounded=""
                            src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Kecamatan_Balige%2C_Toba_Samosir_02.jpg"
                            fluid></b-img>
                 </b-col>
-<!--            </li>-->
-        </b-row>
+            </b-row>
+        </div>
         <div>
             <b-pagination
                     v-model="currentPage"
@@ -96,6 +103,12 @@
             }
         },
         data() {
+
+            var val=false;
+            if(localStorage.getItem('token')){
+                val=true
+            }
+
             return {
                 perPage: 6,
                 currentPage: 1,
@@ -103,7 +116,8 @@
                 batasatas: 6,
                 lastpage: 1,
                 tes: "",
-                kecamatan: []
+                kecamatan: [],
+                authenticated: val
             }
         },
         async mounted() {
