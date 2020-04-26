@@ -24,7 +24,8 @@
               <b-dropdown-item v-if="authenticated"><router-link to="/">Profile</router-link></b-dropdown-item>
               <b-dropdown-item v-if="authenticated"><router-link to="/">Keranjang</router-link></b-dropdown-item>
               <b-dropdown-item v-if="authenticated"><router-link to="/">Pesanan</router-link></b-dropdown-item>
-              <b-dropdown-item  v-on:click="logout"><router-link v-if="authenticated" to="/">Logout</router-link><router-link v-else to="/login">Login</router-link></b-dropdown-item>
+              <b-dropdown-item v-if="role=='ROLE_ADMIN'"><router-link to="/daftarAdmin">Daftar Admin Desa</router-link></b-dropdown-item>
+              <b-dropdown-item  v-on:click="logout"><a v-if="authenticated" href="/">Logout</a><router-link v-else to="/login">Login</router-link></b-dropdown-item>
             </b-nav-item-dropdown>
 
             <b-navbar-brand><router-link to="/"></router-link> </b-navbar-brand>
@@ -43,11 +44,13 @@
     data(){
       if(localStorage.getItem('token')) {
         return {
-          authenticated: true
+          authenticated: true,
+          role:localStorage.getItem('role')
         }
       }
       return {
-        authenticated: false
+        authenticated: false,
+        role:''
       }
     },
     methods: {
