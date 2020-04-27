@@ -29,11 +29,11 @@
             ></b-pagination>
         </div>
 
-<!--        current page : {{ this.currentPage }}-->
-<!--        last page : {{ this.lastpage }}-->
-<!--        batas bawah : {{ this.batasbawah }}-->
-<!--        batas atas : {{ this.batasatas }}-->
-<!--        pengurangan : {{ currentPage - lastpage }}-->
+        current page : {{ this.currentPage }}
+        last page : {{ this.lastpage }}
+        batas bawah : {{ this.batasbawah }}
+        batas atas : {{ this.batasatas }}
+        pengurangan : {{ currentPage - lastpage }}
 <!--        Tes : {{ tes }}-->
         <hr>
         <p id="judul-desa-populer" class="p-2">Desa Populer</p>
@@ -101,8 +101,7 @@
                 currentPage: 1,
                 batasbawah: 0,
                 batasatas: 6,
-                lastpage: 1,
-                tes: "",
+                lastpage: 0,
                 kecamatan: []
             }
         },
@@ -115,7 +114,11 @@
                 this.kecamatan = response.data
             },
             tambah (){
-                //Lagi di coba
+                if(this.currentPage > this.lastpage){
+                    this.batasbawah = this.batasbawah+((this.currentPage - this.lastpage)*6)
+                    this.lastpage = this.currentPage
+                }
+                this.batasatas = this.batasbawah+6
 
             }
         },
