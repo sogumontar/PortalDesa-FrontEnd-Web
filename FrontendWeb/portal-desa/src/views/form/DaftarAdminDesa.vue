@@ -30,8 +30,8 @@
                         <p>:</p>
                     </b-col>
                     <b-col cols="8" col md="5" lg="4" sm="7" >
-                        <b-select v-model="kec" required>
-                            <b-select-option v-for="kecamatan in kecamatan" :key="kecamatan.sku" v-model="keca">{{kecamatan.nama}}</b-select-option>
+                        <b-select v-on:change="test" v-model="kec" required>
+                            <b-select-option  v-for="kecamatan in kecamatan" :key="kecamatan.sku"  v-bind:value="kecamatan.nama">{{kecamatan.nama}}</b-select-option>
                         </b-select>
                     </b-col>
                 </b-form-row>
@@ -134,7 +134,6 @@
                 username : '',
                 email : '',
                 kec : '',
-                keca: '',
                 password : '',
                 confirmPassword : '',
                 output: ''
@@ -147,6 +146,9 @@
             async load() {
                 const response = await axios.get('http://localhost:9000/kecamatan/')
                 this.kecamatan = response.data
+            },
+            test(){
+                console.log("value : "+this.kec)
             },
             formSubmit(e) {
                 e.preventDefault();
