@@ -117,6 +117,8 @@
                 if(this.currentPage > this.lastpage){
                     this.batasbawah = this.batasbawah+((this.currentPage - this.lastpage)*6)
                     this.lastpage = this.currentPage
+                }else if(this.currentPage === this.lastpage){
+                    this.ba
                 }
                 this.batasatas = this.batasbawah+6
 
