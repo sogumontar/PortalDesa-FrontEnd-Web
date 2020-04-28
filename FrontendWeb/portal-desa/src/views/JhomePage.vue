@@ -27,14 +27,20 @@
             </b-row>
         </div>
         <div>
-            <b-pagination
-                    v-model="currentPage"
-                    :total-rows="rows"
-                    :per-page="perPage"
-                    @change="tambah()"
-                    align="center"
-            ></b-pagination>
-            {{this.currentPage=this.currentPage}}
+            <a @click="first()"> first </a>
+            <a @click="kurang()"> previous </a>
+            <div v-for="test in val" :key ="test">
+                <a @click="tambah(test)">{{test}}</a>
+            </div>
+            <a @click="plus()"> next </a>
+            <a @click="last()"> last </a>
+<!--            <b-pagination-->
+<!--                    v-model="currentPage"-->
+<!--                    :total-rows="rows"-->
+<!--                    :per-page="perPage"-->
+<!--                    @change="tambah(currentPage)"-->
+<!--                    align="center"-->
+<!--            ></b-pagination>-->
         </div>
 
         <hr>
@@ -109,7 +115,9 @@
                 batasatas: 6,
                 lastpage: 1,
                 authenticated: val,
-                kecamatan: []
+                kecamatan: [],
+                test: 1,
+                val:1
             }
         },
         async mounted() {
@@ -119,11 +127,41 @@
             async load() {
                 const response = await axios.get('http://localhost:9000/kecamatan/')
                 this.kecamatan = response.data
+                this.val=(Math.ceil(this.kecamatan.length/6))
             },
-            tambah (){
-                console.log(this.currentPage)
-                    this.batasatas=(this.currentPage)*6
+            tambah (current){
+                console.log(current)
+                this.test=current
+                    this.batasatas=(current)*6
                     this.batasbawah=this.batasatas-6
+            },
+            kurang(){
+                console.log(this.test);
+                if(this.test>1) {
+                    this.test -= 1;
+                }
+                this.batasatas=(this.test)*6
+                this.batasbawah=this.batasatas-6
+            },
+            plus(){
+                var test=this.test;
+                console.log(test)
+                if(this.test<Math.ceil(this.kecamatan.length/6)){
+                    this.test+=1;
+                }
+                this.batasatas=(this.test)*6
+                this.batasbawah=this.batasatas-6
+            },
+            first(){
+                this.test=1;
+                this.batasatas=(1)*6
+                this.batasbawah=this.batasatas-6
+            },
+            last(){
+                var test =(Math.ceil(this.kecamatan.length/6))
+                this.test=test;
+                this.batasatas=(test)*6
+                this.batasbawah=this.batasatas-6
             }
         },
         computed: {
