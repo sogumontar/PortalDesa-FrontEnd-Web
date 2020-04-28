@@ -36,11 +36,11 @@
             ></b-pagination>
         </div>
 
-<!--        current page : {{ this.currentPage }}-->
-<!--        last page : {{ this.lastpage }}-->
-<!--        batas bawah : {{ this.batasbawah }}-->
-<!--        batas atas : {{ this.batasatas }}-->
-<!--        pengurangan : {{ currentPage - lastpage }}-->
+        current page : {{ this.currentPage }}
+        last page : {{ this.lastpage }}
+        batas bawah : {{ this.batasbawah }}
+        batas atas : {{ this.batasatas }}
+        pengurangan : {{ currentPage - lastpage }}
 <!--        Tes : {{ tes }}-->
         <hr>
         <p id="judul-desa-populer" class="p-2">Desa Populer</p>
@@ -117,7 +117,9 @@
                 lastpage: 1,
                 tes: "",
                 kecamatan: [],
-                authenticated: val
+                authenticated: val,
+                lastpage: 0,
+                kecamatan: []
             }
         },
         async mounted() {
@@ -129,7 +131,13 @@
                 this.kecamatan = response.data
             },
             tambah (){
-                //Lagi di coba
+                if(this.currentPage > this.lastpage){
+                    this.batasbawah = this.batasbawah+((this.currentPage - this.lastpage)*6)
+                    this.lastpage = this.currentPage
+                }else if(this.currentPage === this.lastpage){
+                    this.ba
+                }
+                this.batasatas = this.batasbawah+6
 
             }
         },
