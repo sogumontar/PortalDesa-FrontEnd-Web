@@ -31,17 +31,12 @@
                     v-model="currentPage"
                     :total-rows="rows"
                     :per-page="perPage"
-                    @change="tambah"
+                    @change="tambah()"
                     align="center"
             ></b-pagination>
+            {{this.currentPage=this.currentPage}}
         </div>
 
-        current page : {{ this.currentPage }}
-        last page : {{ this.lastpage }}
-        batas bawah : {{ this.batasbawah }}
-        batas atas : {{ this.batasatas }}
-        pengurangan : {{ currentPage - lastpage }}
-<!--        Tes : {{ tes }}-->
         <hr>
         <p id="judul-desa-populer" class="p-2">Desa Populer</p>
         <b-row class="p-2 pb-4">
@@ -103,22 +98,17 @@
             }
         },
         data() {
-
             var val=false;
             if(localStorage.getItem('token')){
                 val=true
             }
-
             return {
                 perPage: 6,
                 currentPage: 1,
                 batasbawah: 0,
                 batasatas: 6,
                 lastpage: 1,
-                tes: "",
-                kecamatan: [],
                 authenticated: val,
-                lastpage: 0,
                 kecamatan: []
             }
         },
@@ -131,14 +121,9 @@
                 this.kecamatan = response.data
             },
             tambah (){
-                if(this.currentPage > this.lastpage){
-                    this.batasbawah = this.batasbawah+((this.currentPage - this.lastpage)*6)
-                    this.lastpage = this.currentPage
-                }else if(this.currentPage === this.lastpage){
-                    this.ba
-                }
-                this.batasatas = this.batasbawah+6
-
+                console.log(this.currentPage)
+                    this.batasatas=(this.currentPage)*6
+                    this.batasbawah=this.batasatas-6
             }
         },
         computed: {
