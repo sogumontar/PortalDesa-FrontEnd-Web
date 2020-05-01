@@ -86,12 +86,14 @@
                     password : this.password
                 })
                     .then(function (response) {
+                        var now = new Date().getTime();
                         currentObj.responses = response.data;
                         if(response.data.accessToken){
                             localStorage.setItem('token',response.data.accessToken)
                             localStorage.setItem('role',response.data.role)
                             localStorage.setItem('sku',response.data.skuLog)
                             localStorage.setItem('nickName',response.data.nickName)
+                            localStorage.setItem('setupTime',now)
                             window.location.href="/produk"
                             this.$router.push({name: 'ProductPage'})
 
