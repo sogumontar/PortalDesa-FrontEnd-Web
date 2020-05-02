@@ -96,7 +96,6 @@
                             localStorage.setItem('setupTime',now)
                             window.location.href="/produk"
                             this.$router.push({name: 'ProductPage'})
-
                         }
                     })
                     // eslint-disable-next-line no-unused-vars

@@ -25,7 +25,7 @@
               <b-dropdown-item v-if="authenticated"><router-link to="/">Keranjang</router-link></b-dropdown-item>
               <b-dropdown-item v-if="authenticated"><router-link to="/">Pesanan</router-link></b-dropdown-item>
               <b-dropdown-item v-if="role=='ROLE_ADMIN'"><router-link to="/daftarAdmin">Daftar Admin Desa</router-link></b-dropdown-item>
-              <b-dropdown-item  v-on:click="logout"><a v-if="authenticated" href="/">Logout</a><router-link v-else to="/login">Login</router-link></b-dropdown-item>
+              <b-dropdown-item ><a  v-on:click="logout" v-if="authenticated" href="/">Logout</a><router-link v-else to="/login">Login</router-link></b-dropdown-item>
             </b-nav-item-dropdown>
 
             <b-navbar-brand><router-link to="/"></router-link> </b-navbar-brand>
@@ -57,6 +57,7 @@
       logout: function () {
         console.log("testing")
         localStorage.clear()
+        window.location.href="/"
       }
     }
 

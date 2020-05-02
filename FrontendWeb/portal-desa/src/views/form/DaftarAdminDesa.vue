@@ -156,17 +156,20 @@
                 if(this.password !== this.confirmPassword){
                     alert("Password harus sama")
                 } else {
-                    axios.post('http://localhost:9000/auth/signup', {
-                        name : this.name,
+                    axios.post('http://localhost:9000/adminDev/add', {
+                        nama : this.name,
+                        kecamatan : this.kec,
                         username : this.username,
                         email : this.email,
-                        alamat : this.alamat,
                         password : this.password,
-                        confirmPassword : this.confirmPassword,
-                        role : "ROLE_USER"
+                        confirmPassword : this.confirmPassword
                     }).then(
-                        this.$router.push({name: 'Login'})
+                        alert("Admin Desa Registered Successfully")
+                        // this.$router.push({name: 'daftarAdmin'})
                     )
+                        .then(
+                            this.$router.push({name: 'daftarAdmin'})
+                        )
                         .catch(function (err) {
                             currentObj.output = err;
                         });
