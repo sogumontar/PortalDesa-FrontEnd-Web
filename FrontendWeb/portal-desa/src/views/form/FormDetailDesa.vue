@@ -18,11 +18,16 @@
                     <p>:</p>
                 </b-col>
                 <b-col cols="8" col md="5" lg="4" sm="7">
-                    <b-form-file
-                            v-model="file"
-                            placeholder="Choose a file..."
-                            drop-placeholder="Drop file here..."
-                    ></b-form-file>
+                    <div id="app">
+                        <div v-if="!image">
+                            <h2>Select an image</h2>
+                            <input type="file" @change="onFileChange">
+                        </div>
+                        <div v-else>
+                            <img :src="image" width="120" height="100" />
+                            <button @click="removeImage">Remove image</button>
+                        </div>
+                    </div>
                 </b-col>
             </b-form-row>
             <br>
@@ -120,14 +125,15 @@
             return {
                 detail:'',
                 kecamatan :[],
-                file:[],
+                image:'',
                 name: '',
                 kepalaDesa: '',
                 username: '',
                 email :'',
                 sku :'',
                 jumlah : 0,
-                kec:''
+                kec:'',
+                base64 : ''
             }
         },
         methods : {
@@ -140,9 +146,32 @@
             },
             formSubmit(){
                 console.log("testting")
+                console.log(this.filename)
             },
             test(){
 
+            },
+            onFileChange(e) {
+                var files = e.target.files || e.dataTransfer.files;
+                console.log(e.target.files)
+                if (!files.length)
+                    return;
+                this.createImage(files[0]);
+            },
+            createImage(file) {
+                // eslint-disable-next-line no-unused-vars
+                var image = new Image();
+                var reader = new FileReader();
+                var vm = this;
+                reader.onload = (e) => {
+                    vm.image = e.target.result;
+                    console.log(reader.result)
+                };
+                reader.readAsDataURL(file);
+
+            },
+            removeImage: function () {
+                this.image = '';
             }
         }
     }
