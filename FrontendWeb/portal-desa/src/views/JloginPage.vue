@@ -80,7 +80,6 @@
             onSubmit(e) {
                 e.preventDefault();
                 let currentObj = this;
-                //ganti portnya kalau mau dpake, sesuaikan sama port kalian
                 axios.post('http://localhost:9000/auth/signin', {
                     username : this.username,
                     password : this.password
@@ -94,8 +93,14 @@
                             localStorage.setItem('sku',response.data.skuLog)
                             localStorage.setItem('nickName',response.data.nickName)
                             localStorage.setItem('setupTime',now)
-                            window.location.href="/produk"
-                            this.$router.push({name: 'ProductPage'})
+                            if(response.data.role === "ROLE_MERCHANT"){
+                                window.location.href="/produk"
+                            }else if(response.data.role === "ROLE_ADMIN") {
+                                window.location.href="/produk"
+                            }else{
+                                window.location.href="/produk"
+                            }
+                            // this.$router.push({name: 'ProductPage'})
                         }
                     })
                     // eslint-disable-next-line no-unused-vars

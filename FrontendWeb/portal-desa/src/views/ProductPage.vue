@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>Data Produk : </h1>
-        <router-link to="/createProduk"><button class="btn btn-primary">Create produk</button></router-link>
+        <router-link v-if="role=='ROLE_MERCHANT'"  to=""><b-btn @click="check" class="btn btn-primary">Create produk</b-btn></router-link>
         <b-row class="">
             <li v-for="produk in produk" :key="produk.sku">
                 {{produk.nama}}
@@ -33,7 +33,8 @@
         },
         data() {
             return {
-                produk: []
+                produk: [],
+                role:''
             }
         },
         async mounted() {
@@ -42,13 +43,22 @@
         methods: {
             async load() {
                 if(localStorage.getItem('token')){
-                    console.log("ada")
+                    this.role=localStorage.getItem("role")
                 }else{
                     alert("Anda Belum login")
                     this.$router.push({name: 'Login'})
                 }
                 const response = await axios.get('http://localhost:9000/produk/')
                 this.produk = response.data
+            },
+            check(){
+                const response = axios.get('http://localhost:9000/produk/')
+                if(response.data){
+                    this.$router.push({name: 'createProduk'})
+                }else{
+                    alert("anda harus mengisi detail data desa terlebih dahulu")
+                    this.$router.push({path: '/login'})
+                }
             }
         }
     }

@@ -126,12 +126,6 @@
                 </b-col>
             </b-form-row>
         </b-form>
-
-        <!--        <strong>Output:</strong>-->
-        <!--        <pre>-->
-        <!--            {{output}}-->
-        <!--        </pre>-->
-
     </b-container>
 </template>
 
