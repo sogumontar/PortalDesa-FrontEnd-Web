@@ -15,8 +15,10 @@
 
           <b-navbar-nav class="ml-auto mt-1">
             <b-navbar-nav class="mr-4">
-              <b-nav-item><router-link to="/produk">Produk</router-link></b-nav-item>
-              <b-nav-item><router-link to="/desa">Desa</router-link> </b-nav-item>
+              <b-nav-item v-if="role!='ROLE_ADMIN'" ><router-link to="/produk">Produk</router-link></b-nav-item>
+              <b-nav-item v-if="role!='ROLE_ADMIN'"><router-link to="/desa">Desa</router-link> </b-nav-item>
+              <b-nav-item v-if="role=='ROLE_ADMIN'" ><router-link to="/admin/account">Data Akun</router-link></b-nav-item>
+              <b-nav-item v-if="role=='ROLE_ADMIN'"><router-link to="/admin/desa">Data Desa</router-link> </b-nav-item>
             </b-navbar-nav>
             <p class="h2"><b-icon-people-circle></b-icon-people-circle></p>
 <!--            <img alt="Vue logo" src="./assets/pict/profile.png" width="45px" height="45px" >-->

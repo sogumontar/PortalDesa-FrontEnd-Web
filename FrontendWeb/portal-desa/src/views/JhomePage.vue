@@ -8,7 +8,7 @@
             </b-col>
         </b-row>
         <hr>
-        <div right>
+        <div right v-if="kecamatan.length!=0">
             <b-row v-if="authenticated" class="">
                     <b-col cols="12" col lg="4" sm="12" md="6" class="p-4" v-for="kecamatan in kecamatan.slice(batasbawah, batasatas)" :key="kecamatan.sku">
                         <router-link  :to="'/detailKecamatan/'+kecamatan.nama"><h5>{{kecamatan.nama}}</h5></router-link>
@@ -26,6 +26,10 @@
                 </b-col>
             </b-row>
         </div>
+        <div v-else>
+            <center><img  alt="Vue logo" src="../assets/gif/25.gif" width="90px"></center>
+        </div>
+        <br><br>
         <div>
             <b-pagination
                     v-model="currentPage"
@@ -86,7 +90,6 @@
                 digunakan
                 sebagai tempat berkemah.</p>
         </b-row>
-        <h1>This is Desa</h1>
     </b-container>
 </template>
 
@@ -95,12 +98,12 @@
 
     export default {
         devServer: {
-            proxy: {
-                '^/api/': {
-                    target: 'http://localhost:9000/kecamatan/',
-                    changeOrigin: true
-                }
-            }
+            // proxy: {
+            //     '^/api/': {
+            //         target: 'http://localhost:9000/kecamatan/',
+            //         changeOrigin: true
+            //     }
+            // }
         },
         data() {
 
@@ -125,7 +128,7 @@
         },
         methods: {
             async load() {
-                const response = await axios.get('http://localhost:9000/kecamatan/')
+                const response = await axios.get('https://portal-desa.herokuapp.com/kecamatan/')
                 this.kecamatan = response.data
             },
             tambah (){

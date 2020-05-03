@@ -42,6 +42,9 @@
                 <b-col col md="auto" lg="auto" class="mt-4">
                     <b-button type="submit" variant="primary" id="tombol-masuk" class="pl-3 pr-3">Masuk</b-button>
                 </b-col>
+                <div id="load">
+
+                </div>
             </b-form-row>
             <b-row class="justify-content-sm-center ">
                 <b-col cols="3" col md="2" lg="1">
@@ -80,7 +83,10 @@
             onSubmit(e) {
                 e.preventDefault();
                 let currentObj = this;
-                axios.post('http://localhost:9000/auth/signin', {
+                const html = `<img  src="../assets/gif/25.gif" width="90px">`
+                window.load.innerHTML =html
+                // document.getElementById("load").append('<img src="../assets/gif/25.gif" width="90px">')
+                axios.post('https://portal-desa.herokuapp.com/auth/signin', {
                     username : this.username,
                     password : this.password
                 })
@@ -96,7 +102,7 @@
                             if(response.data.role === "ROLE_MERCHANT"){
                                 window.location.href="/produk"
                             }else if(response.data.role === "ROLE_ADMIN") {
-                                window.location.href="/produk"
+                                window.location.href="/admin"
                             }else{
                                 window.location.href="/produk"
                             }

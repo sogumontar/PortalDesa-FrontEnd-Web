@@ -41,10 +41,9 @@
                 <b-col cols="8" col md="5" lg="4" sm="7">
                     <b-form-input
                             id="input-nama"
-                            v-model="name"
+                            v-model="detail.nama"
                             required
                             type="text"
-                            :placeholder="detail.nama"
                     ></b-form-input>
                 </b-col>
             </b-form-row>
@@ -59,10 +58,9 @@
                 <b-col cols="8" col md="5" lg="4" sm="7">
                     <b-form-input
                             id="input-kepalaDesa"
-                            v-model="kepalaDesa"
+                            v-model="detail.kepalaDesa"
                             required
                             type="text"
-                            :placeholder="detail.namaKepalaDesa"
                     ></b-form-input>
                 </b-col>
             </b-form-row>
@@ -91,8 +89,8 @@
                     <p>:</p>
                 </b-col>
                 <b-col cols="8" col md="5" lg="4" sm="7" >
-                    <b-select v-on:change="test" v-model="kec" required >
-                        <b-select-option selected  v-for="kecamatan in kecamatan" :key="kecamatan.sku"  v-bind:value="detail.kecamatan">{{kecamatan.nama}}</b-select-option>
+                    <b-select  required  v-model="detail.kecamatan">
+                        <b-select-option selected  v-for="kecamatan in kecamatan" :key="kecamatan.sku"  v-model="kecamatan.nama">{{kecamatan.nama}}</b-select-option>
                     </b-select>
                 </b-col>
             </b-form-row>
@@ -145,11 +143,16 @@
                 this.kecamatan = responses.data
             },
             formSubmit(){
-                console.log("testting")
-                console.log(this.filename)
-            },
-            test(){
-
+                axios.put('http://localhost:9000/desa/update/'+this.sku, {
+                    nama: this.detail.nama,
+                    namaKepalaDesa: this.detail.kepalaDesa,
+                    jumlahPenduduk: this.jumlah,
+                    kecamatan : this.detail.kecamatan
+                })
+                    // eslint-disable-next-line no-unused-vars
+                    .then(
+                        this.$router.go('detailDesa')
+                    )
             },
             onFileChange(e) {
                 var files = e.target.files || e.dataTransfer.files;
@@ -165,7 +168,13 @@
                 var vm = this;
                 reader.onload = (e) => {
                     vm.image = e.target.result;
-                    console.log(reader.result)
+                    axios.put('http://localhost:9000/desa/add/picture', {
+                        base64File : reader.result,
+                        skuDesa : localStorage.getItem("sku")
+                    }).then(
+                        alert("Add Desa Pict success")
+                        // this.$router.push({name: 'daftarAdmin'})
+                    )
                 };
                 reader.readAsDataURL(file);
 
