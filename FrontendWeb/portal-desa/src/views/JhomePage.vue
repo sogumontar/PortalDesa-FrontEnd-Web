@@ -26,14 +26,25 @@
                 </b-col>
             </b-row>
         </div>
+        <b-row>
+            <b-col cols="2" col sm="2" lg="2" md="2"></b-col>
+            <b-col cols="8" col sm="8" lg="8" md="8" align="center">
+                <b-button @click="first" size="sm" class="mr-1" variant="primary">First</b-button>
+                <b-button @click="kurang" size="sm" class="mr-1" variant="outline-primary"><b-icon-skip-backward></b-icon-skip-backward> </b-button>
+                <b-button @click="plus" size="sm" class="mr-1" variant="outline-primary"><b-icon-skip-forward></b-icon-skip-forward></b-button>
+                <b-button @click="last" size="sm" class="mr-1" variant="primary">Last</b-button>
+<!--                <a @click="first()"> first </a>-->
+<!--                <a @click="kurang()"> previous </a>-->
+<!--                <div v-for="test in val" :key ="test">-->
+<!--                    <a @click="tambah(test)">{{test}}</a>-->
+<!--                </div>-->
+<!--                <a @click="plus()"> next </a>-->
+<!--                <a @click="last()"> last </a></b-col>-->
+            </b-col>
+            <b-col cols="2" col sm="2" lg="2" md="2"></b-col>
+        </b-row>
         <div>
-            <a @click="first()"> first </a>
-            <a @click="kurang()"> previous </a>
-            <div v-for="test in val" :key ="test">
-                <a @click="tambah(test)">{{test}}</a>
-            </div>
-            <a @click="plus()"> next </a>
-            <a @click="last()"> last </a>
+
 <!--            <b-pagination-->
 <!--                    v-model="currentPage"-->
 <!--                    :total-rows="rows"-->
