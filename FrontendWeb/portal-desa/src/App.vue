@@ -15,8 +15,10 @@
 
           <b-navbar-nav class="ml-auto mt-1">
             <b-navbar-nav class="mr-4">
-              <b-nav-item><router-link to="/produk">Produk</router-link></b-nav-item>
-              <b-nav-item><router-link to="/desa">Desa</router-link> </b-nav-item>
+              <b-nav-item v-if="role!='ROLE_ADMIN'" ><router-link to="/produk">Produk</router-link></b-nav-item>
+              <b-nav-item v-if="role!='ROLE_ADMIN'"><router-link to="/desa">Desa</router-link> </b-nav-item>
+              <b-nav-item v-if="role=='ROLE_ADMIN'" ><router-link to="/admin/account">Data Akun</router-link></b-nav-item>
+              <b-nav-item v-if="role=='ROLE_ADMIN'"><router-link to="/admin/desa">Data Desa</router-link> </b-nav-item>
             </b-navbar-nav>
             <p class="h2"><b-icon-people-circle></b-icon-people-circle></p>
 <!--            <img alt="Vue logo" src="./assets/pict/profile.png" width="45px" height="45px" >-->
@@ -25,7 +27,7 @@
               <b-dropdown-item v-if="authenticated"><router-link to="/">Keranjang</router-link></b-dropdown-item>
               <b-dropdown-item v-if="authenticated"><router-link to="/">Pesanan</router-link></b-dropdown-item>
               <b-dropdown-item v-if="role=='ROLE_ADMIN'"><router-link to="/daftarAdmin">Daftar Admin Desa</router-link></b-dropdown-item>
-              <b-dropdown-item  v-on:click="logout"><a v-if="authenticated" href="/">Logout</a><router-link v-else to="/login">Login</router-link></b-dropdown-item>
+              <b-dropdown-item ><a  v-on:click="logout" v-if="authenticated" href="/">Logout</a><router-link v-else to="/login">Login</router-link></b-dropdown-item>
             </b-nav-item-dropdown>
 
             <b-navbar-brand><router-link to="/"></router-link> </b-navbar-brand>
@@ -57,6 +59,7 @@
       logout: function () {
         console.log("testing")
         localStorage.clear()
+        window.location.href="/"
       }
     }
 

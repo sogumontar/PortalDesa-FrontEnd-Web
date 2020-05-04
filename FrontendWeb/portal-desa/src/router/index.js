@@ -8,6 +8,11 @@ import JregisterPage from "../views/JregisterPage";
 import CreateProdukForm from "../views/form/CreateProdukForm";
 import DetailKecamatanPage from "../views/DetailKecamatanPage";
 import DaftarAdminDesa from "../views/form/DaftarAdminDesa";
+import FormDetailDesa from "../views/form/FormDetailDesa";
+import Dashboard from "../views/admin/Dashboard";
+import ListAccount from "../views/admin/ListAccount";
+import ListDesa from "../views/admin/ListDesa";
+
 
 Vue.use(VueRouter);
 
@@ -16,6 +21,26 @@ const routes = [
     path: "/",
     name: "Home",
     component: JhomePage
+  },
+  {
+    path: "/admin/desa",
+    name: "adminDesa",
+    component: ListDesa
+  },
+  {
+    path: "/admin/account",
+    name: "account",
+    component: ListAccount
+  },
+  {
+    path: "/admin",
+    name: "admin",
+    component: Dashboard
+  },
+  {
+    path: "/detailDesa",
+    name: "detailDesa",
+    component: FormDetailDesa
   },
   {
     path: "/daftarAdmin",
