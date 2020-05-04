@@ -62,7 +62,15 @@
                     <p>:</p>
                 </b-col>
                 <b-col cols="8" col md="5" lg="4" sm="7">
-                    <input type="file" accept="image/*" @change="uploadImage($event)" id="file-input">
+                    <div id="app">
+                        <div v-if="!gambar">
+                            <input type="file" @change="onFileChange">
+                        </div>
+                        <div v-else>
+                            <img :src="gambar" width="120" height="100" />
+                            <button @click="removeImage">Remove image</button>
+                        </div>
+                    </div>
                 </b-col>
             </b-form-row>
 
@@ -70,22 +78,20 @@
                 <b-col col md="4" lg="2">
 
                 </b-col>
-                <b-col col md="auto" lg="auto">
+                <b-col col md="2" lg="auto">
 
                 </b-col>
-                <b-col col md="auto" lg="auto" class="mt-2">
+                <b-col col md="auto" lg="auto" class="mt-3">
                     <button type="submit" id="tombol-daftar" class="pl-3 pr-3 btn btn-primary">Simpan</button>
                 </b-col>
             </b-form-row>
         </b-form>
-        <b-col col md="auto" lg="auto" class="mt-2">
-            <button type="submit"  id="tombol" class="pl-3 pr-3 btn btn-primary">Simpan</button>
-        </b-col>
     </b-container>
 </template>
 
 <script>
-    import axios from 'axios'
+
+    import axios from "axios";
 
     export default {
         mounted() {
@@ -97,7 +103,7 @@
                 harga: '',
                 deskripsi: '',
                 gambar: '',
-                selectedFile : null
+                selectedFile : null,
             };
         },
         methods: {
@@ -105,15 +111,16 @@
                 this.selectedFile = event.target.files[0].name
             },
             formSubmit(e) {
-                console.log(this.selectedFile)
+                console.log(this.nama)
+                console.log(this.harga)
+                console.log(this.deskripsi)
                 e.preventDefault();
                 let currentObj = this;
                 axios.post('http://localhost:9000/produk/add', {
                     nama: this.nama,
                     harga: this.harga,
                     deskripsi: this.deskripsi,
-                    desa: "Silaen",
-                    gambar: this.selectedFile
+                    skuDesa: localStorage.getItem("sku")
                 })
                     // eslint-disable-next-line no-unused-vars
                     .then(
@@ -128,7 +135,34 @@
                     .catch(function (err) {
                         currentObj.output = err;
                     });
+            },
+            onFileChange(e) {
+                var files = e.target.files || e.dataTransfer.files;
+                console.log(e.target.files)
+                if (!files.length)
+                    return;
+                this.createImage(files[0]);
+            },
+            createImage(file) {
+                // eslint-disable-next-line no-unused-vars
+                var image = new Image();
+                var reader = new FileReader();
+                var vm = this;
+                reader.onload = (e) => {
+                    vm.image = e.target.result;
+                    axios.post('http://localhost:9000/produk/add/gambar', {
+                        gambar : reader.result,
+                        nama : localStorage.getItem("sku")
+                    }).then(
+                        alert("Add Desa Pict success")
+                        // this.$router.push({name: 'daftarAdmin'})
+                    )
+                };
+                reader.readAsDataURL(file);
 
+            },
+            removeImage: function () {
+                this.image = '';
             }
         }
     }

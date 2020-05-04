@@ -14,7 +14,6 @@
                            src="assets/kec.jpg"
                            fluid></b-img>
                 </b-col>
-                <p>{{detail}}</p>
             </li>
         </b-row>
     </div>
@@ -35,7 +34,7 @@
         data() {
             return {
                 produk: [],
-                detail:'asd',
+                detail:'',
                 role:''
             }
         },
@@ -53,15 +52,17 @@
                 const response = await axios.get('http://localhost:9000/produk/')
                 this.produk = response.data
                 const responses = await axios.get('http://localhost:9000/desa/desa/skuAdmin/'+localStorage.getItem("sku"))
-                this.detail=responses.data
+                this.detail=responses.data.data
                 console.log(responses.data)
             },
             check(){
                 if(this.detail.data.namaKepalaDesa){
+                    window.location.href="/createProduk"
                     this.$router.push({name: 'createProduk'})
                 }else{
                     alert("anda harus mengisi detail data desa terlebih dahulu")
-                    this.$router.push({path: '/login'})
+                    this.$router.push({path: '/detailDesa'})
+                    window.location.href="/detailDesa"
                 }
             }
         }
