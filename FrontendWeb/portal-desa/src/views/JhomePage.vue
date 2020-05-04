@@ -8,33 +8,52 @@
             </b-col>
         </b-row>
         <hr>
-        <b-row class="">
-<!--            <li >-->
-<!--                {{kecamatan.nama}}-->
+        <div right>
+            <b-row v-if="authenticated" class="">
+                    <b-col cols="12" col lg="4" sm="12" md="6" class="p-4" v-for="kecamatan in kecamatan.slice(batasbawah, batasatas)" :key="kecamatan.sku">
+                        <router-link  :to="'/detailKecamatan/'+kecamatan.nama"><h5>{{kecamatan.nama}}</h5></router-link>
+                        <b-img rounded=""
+                               src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Kecamatan_Balige%2C_Toba_Samosir_02.jpg"
+                               fluid></b-img>
+                    </b-col>
+            </b-row>
+            <b-row v-else class="">
                 <b-col cols="12" col lg="4" sm="12" md="6" class="p-4" v-for="kecamatan in kecamatan.slice(batasbawah, batasatas)" :key="kecamatan.sku">
                     <h5>{{kecamatan.nama}}</h5>
                     <b-img rounded=""
                            src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Kecamatan_Balige%2C_Toba_Samosir_02.jpg"
                            fluid></b-img>
                 </b-col>
-<!--            </li>-->
+            </b-row>
+        </div>
+        <b-row>
+            <b-col cols="2" col sm="2" lg="2" md="2"></b-col>
+            <b-col cols="8" col sm="8" lg="8" md="8" align="center">
+                <b-button @click="first" size="sm" class="mr-1" variant="primary">First</b-button>
+                <b-button @click="kurang" size="sm" class="mr-1" variant="outline-primary"><b-icon-skip-backward></b-icon-skip-backward> </b-button>
+                <b-button @click="plus" size="sm" class="mr-1" variant="outline-primary"><b-icon-skip-forward></b-icon-skip-forward></b-button>
+                <b-button @click="last" size="sm" class="mr-1" variant="primary">Last</b-button>
+<!--                <a @click="first()"> first </a>-->
+<!--                <a @click="kurang()"> previous </a>-->
+<!--                <div v-for="test in val" :key ="test">-->
+<!--                    <a @click="tambah(test)">{{test}}</a>-->
+<!--                </div>-->
+<!--                <a @click="plus()"> next </a>-->
+<!--                <a @click="last()"> last </a></b-col>-->
+            </b-col>
+            <b-col cols="2" col sm="2" lg="2" md="2"></b-col>
         </b-row>
         <div>
-            <b-pagination
-                    v-model="currentPage"
-                    :total-rows="rows"
-                    :per-page="perPage"
-                    @change="tambah"
-                    align="center"
-            ></b-pagination>
+
+<!--            <b-pagination-->
+<!--                    v-model="currentPage"-->
+<!--                    :total-rows="rows"-->
+<!--                    :per-page="perPage"-->
+<!--                    @change="tambah(currentPage)"-->
+<!--                    align="center"-->
+<!--            ></b-pagination>-->
         </div>
 
-<!--        current page : {{ this.currentPage }}-->
-<!--        last page : {{ this.lastpage }}-->
-<!--        batas bawah : {{ this.batasbawah }}-->
-<!--        batas atas : {{ this.batasatas }}-->
-<!--        pengurangan : {{ currentPage - lastpage }}-->
-<!--        Tes : {{ tes }}-->
         <hr>
         <p id="judul-desa-populer" class="p-2">Desa Populer</p>
         <b-row class="p-2 pb-4">
@@ -96,14 +115,20 @@
             }
         },
         data() {
+            var val=false;
+            if(localStorage.getItem('token')){
+                val=true
+            }
             return {
                 perPage: 6,
                 currentPage: 1,
                 batasbawah: 0,
                 batasatas: 6,
                 lastpage: 1,
-                tes: "",
-                kecamatan: []
+                authenticated: val,
+                kecamatan: [],
+                test: 1,
+                val:1
             }
         },
         async mounted() {
@@ -113,10 +138,41 @@
             async load() {
                 const response = await axios.get('http://localhost:9000/kecamatan/')
                 this.kecamatan = response.data
+                this.val=(Math.ceil(this.kecamatan.length/6))
             },
-            tambah (){
-                //Lagi di coba
-
+            tambah (current){
+                console.log(current)
+                this.test=current
+                    this.batasatas=(current)*6
+                    this.batasbawah=this.batasatas-6
+            },
+            kurang(){
+                console.log(this.test);
+                if(this.test>1) {
+                    this.test -= 1;
+                }
+                this.batasatas=(this.test)*6
+                this.batasbawah=this.batasatas-6
+            },
+            plus(){
+                var test=this.test;
+                console.log(test)
+                if(this.test<Math.ceil(this.kecamatan.length/6)){
+                    this.test+=1;
+                }
+                this.batasatas=(this.test)*6
+                this.batasbawah=this.batasatas-6
+            },
+            first(){
+                this.test=1;
+                this.batasatas=(1)*6
+                this.batasbawah=this.batasatas-6
+            },
+            last(){
+                var test =(Math.ceil(this.kecamatan.length/6))
+                this.test=test;
+                this.batasatas=(test)*6
+                this.batasbawah=this.batasatas-6
             }
         },
         computed: {

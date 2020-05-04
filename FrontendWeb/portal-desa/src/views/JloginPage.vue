@@ -7,50 +7,6 @@
         </b-col>
     </b-row>
 
-<!--    <b-form @submit="onSubmit" class="mt-3">-->
-<!--        <b-form-row class="justify-content-sm-center">-->
-<!--            <b-col cols="1" col md="auto" lg="1" class="mt-2">-->
-<!--                <p>Email</p>-->
-<!--            </b-col>-->
-<!--            <b-col cols="1" col md="auto" lg="auto" sm="auto" class="mt-2">-->
-<!--                <p>:</p>-->
-<!--            </b-col>-->
-<!--            <b-col cols="6"  col md="5" lg="4" sm="7">-->
-<!--                <b-form-input-->
-<!--                        id="input-email"-->
-<!--                        v-model="form.email"-->
-<!--                        required-->
-<!--                        type="email"-->
-<!--                ></b-form-input>-->
-<!--            </b-col>-->
-<!--        </b-form-row>-->
-
-<!--        <b-form-row class="justify-content-sm-center mt-3">-->
-<!--            <b-col cols="auto" col md="auto" lg="1" class="mt-2">-->
-<!--                <p>Password</p>-->
-<!--            </b-col>-->
-<!--            <b-col cols="auto" col md="auto" lg="auto" class="mt-2">-->
-<!--                <p>:</p>-->
-<!--            </b-col>-->
-<!--            <b-col cols="8" col md="5" lg="4" sm="7">-->
-<!--                <b-form-input-->
-<!--                        id="input-password"-->
-<!--                        v-model="form.password"-->
-<!--                        required-->
-<!--                        type="password"-->
-<!--                ></b-form-input>-->
-<!--            </b-col>-->
-<!--        </b-form-row>-->
-
-<!--        <b-form-row class="justify-content-md-center">-->
-<!--            <b-col col md="4" lg="2">-->
-<!--                =======-->
-<!--        <b-row class="justify-content-sm-center">-->
-<!--            <b-col col md="auto" sm="auto">-->
-<!--                <p id="logo"><b-icon-people-circle></b-icon-people-circle></p>-->
-<!--            </b-col>-->
-<!--        </b-row>-->
-
         <b-form @submit="onSubmit" class="mt-3">
             <b-form-row class="justify-content-sm-center">
                 <b-col cols="auto" col md="auto" lg="1" class="mt-2">
@@ -109,6 +65,9 @@
     import axios from "axios";
 
     export default {
+        mounted() {
+            console.log('Component mounted.')
+        },
         data(){
           return {
                   username: '',
@@ -129,17 +88,19 @@
                     .then(function (response) {
                         currentObj.responses = response.data;
                         if(response.data.accessToken){
-                            console.log("Login Success")
-                            // this.$router.go("/")
-                            // window.location.href = "/"
-                            this.$emit("authenticated", true);
-                            // this.$parent.$router.replace({name: "Home"})
-                            // this.$router.replace()
+                            localStorage.setItem('token',response.data.accessToken)
+                            localStorage.setItem('role',response.data.role)
+                            localStorage.setItem('sku',response.data.skuLog)
+                            localStorage.setItem('nickName',response.data.nickName)
+                            window.location.href="/produk"
+                            this.$router.push({name: 'ProductPage'})
+
                         }
                     })
+                    // eslint-disable-next-line no-unused-vars
                     .catch(function (response) {
                         // alert("Username atau password salah")
-                        alert(response.data)
+                        // alert(response)
                         currentObj.responses = "Login Failed, Check your username/password";
                     });
             }
