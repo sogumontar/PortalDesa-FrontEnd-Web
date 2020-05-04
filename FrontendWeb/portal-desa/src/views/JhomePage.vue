@@ -26,12 +26,10 @@
                 </b-col>
             </b-row>
         </div>
-<<<<<<< feature/produk-desa
         <div v-else>
             <center><img  alt="Vue logo" src="../assets/gif/25.gif" width="90px"></center>
         </div>
         <br><br>
-=======
         <b-row>
             <b-col cols="2" col sm="2" lg="2" md="2"></b-col>
             <b-col cols="8" col sm="8" lg="8" md="8" align="center">
