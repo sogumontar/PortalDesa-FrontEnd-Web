@@ -124,7 +124,8 @@
                 })
                     // eslint-disable-next-line no-unused-vars
                     .then(
-                        this.$router.go('ProductPage')
+                        window.location.href= "/produk"
+                        // this.$router.go('ProductPage')
                     )
                     .then(function () {
                         this.$router.push({name: 'ProductPage'})

@@ -39,7 +39,7 @@
         },
         methods: {
             async load() {
-                const response = await axios.get('https://portal-desa.herokuapp.com/desa/kecamatan/'+this.$route.params.sku)
+                const response = await axios.get('http://localhost:9000/desa/kecamatan/'+this.$route.params.sku)
                 this.produk = response.data
             }
         }

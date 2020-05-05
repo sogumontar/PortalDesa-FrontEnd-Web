@@ -12,7 +12,7 @@ import FormDetailDesa from "../views/form/FormDetailDesa";
 import Dashboard from "../views/admin/Dashboard";
 import ListAccount from "../views/admin/ListAccount";
 import ListDesa from "../views/admin/ListDesa";
-
+import DetailDesaAdmin from "../views/admin/DetailDesaAdmin";
 
 Vue.use(VueRouter);
 
@@ -21,6 +21,11 @@ const routes = [
     path: "/",
     name: "Home",
     component: JhomePage
+  },
+  {
+    path: "/detailDesaAdmin/:sku",
+    name: "detailDesaAdmin",
+    component: DetailDesaAdmin
   },
   {
     path: "/admin/desa",

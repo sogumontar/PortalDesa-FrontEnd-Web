@@ -58,7 +58,7 @@
                 <b-col cols="8" col md="5" lg="4" sm="7">
                     <b-form-input
                             id="input-kepalaDesa"
-                            v-model="detail.kepalaDesa"
+                            v-model="detail.namaKepalaDesa"
                             required
                             type="text"
                     ></b-form-input>
@@ -74,7 +74,7 @@
                 <b-col cols="8" col md="5" lg="4" sm="7">
                     <b-form-input
                             id="input-jumlah"
-                            v-model="jumlah"
+                            v-model="detail.jumlahPenduduk"
                             required
                             type="number"
                             min="0"
@@ -139,6 +139,7 @@
                 this.sku=localStorage.getItem("sku")
                 const response = await axios.get('http://localhost:9000/desa/desa/skuAdmin/'+this.sku)
                 this.detail=response.data.data
+                console.log(this.detail)
                 const responses = await axios.get('http://localhost:9000/kecamatan/')
                 this.kecamatan = responses.data
             },

@@ -49,10 +49,10 @@
                     alert("Anda Belum login")
                     this.$router.push({name: 'Login'})
                 }
-                const response = await axios.get('http://localhost:9000/produk/')
+                const response = await axios.get('http://localhost:9000/produk/skuDesa/'+localStorage.getItem("sku"))
                 this.produk = response.data
                 const responses = await axios.get('http://localhost:9000/desa/desa/skuAdmin/'+localStorage.getItem("sku"))
-                this.detail=responses.data.data
+                this.detail=responses.data
                 console.log(responses.data)
             },
             check(){
