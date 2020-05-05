@@ -1,8 +1,8 @@
 <template>
     <div>
         <p>Ini List Account</p>
-        <p>Daftar Account Admin Desa</p>
         <div right v-if="accountMerchant.length!=0">
+            <p>Daftar Account Admin Desa</p>
             <div class="overflow-auto">
                 <b-table
                         id="my-table"
@@ -17,6 +17,7 @@
                         aria-controls="my-table"
                 ></b-pagination>
             </div>
+            <p>Daftar Account Customer</p>
             <div class="overflow-auto">
                 <b-table
                         id="my-table-customer"
@@ -30,6 +31,16 @@
                         :per-page="perPage"
                         aria-controls="my-table"
                 ></b-pagination>
+            </div>
+        </div>
+        <div v-else>
+            <p>Daftar Account Admin Desa</p>
+            <div class="overflow-auto">
+                <center><img src="../../assets/gif/25.gif" alt=""></center>
+            </div>
+            <p>Daftar Account Customer</p>
+            <div class="overflow-auto">
+                <center><img src="../../assets/gif/25.gif" alt=""></center>
             </div>
         </div>
     </div>
