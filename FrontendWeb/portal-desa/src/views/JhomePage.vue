@@ -47,7 +47,6 @@
             </b-col>
             <b-col cols="2" col sm="2" lg="2" md="2"></b-col>
         </b-row>
->>>>>>> release/produkDesa
         <div>
 
 <!--            <b-pagination-->
