@@ -13,6 +13,9 @@ import Dashboard from "../views/admin/Dashboard";
 import ListAccount from "../views/admin/ListAccount";
 import ListDesa from "../views/admin/ListDesa";
 import DetailDesaAdmin from "../views/admin/DetailDesaAdmin";
+import DetailProdukPage from "../views/DetailProdukPage";
+import FormBeliProduk from "../views/form/FormBeliProduk";
+import DaftarPesananCustomer from "../views/customer/DaftarPesananCustomer";
 
 Vue.use(VueRouter);
 
@@ -21,6 +24,21 @@ const routes = [
     path: "/",
     name: "Home",
     component: JhomePage
+  },
+  {
+    path: "/daftarPesanan",
+    name: "daftarPesanan",
+    component: DaftarPesananCustomer
+  },
+  {
+    path: "/beliProduk/:sku",
+    name: "beliProduk",
+    component: FormBeliProduk
+  },
+  {
+    path: "/detailProduk/:sku",
+    name: "DetailProduk",
+    component: DetailProdukPage
   },
   {
     path: "/detailDesaAdmin/:sku",
