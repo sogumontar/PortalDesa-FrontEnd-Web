@@ -104,7 +104,7 @@
                             }else if(response.data.role === "ROLE_ADMIN") {
                                 window.location.href="/admin"
                             }else{
-                                window.location.href="/produk"
+                                window.location.href="/"
                             }
                             // this.$router.push({name: 'ProductPage'})
                         }
