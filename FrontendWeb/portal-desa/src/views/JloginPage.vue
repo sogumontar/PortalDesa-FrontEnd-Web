@@ -83,8 +83,8 @@
             onSubmit(e) {
                 e.preventDefault();
                 let currentObj = this;
-                const html = `<img  src="../assets/gif/25.gif" width="90px">`
-                window.load.innerHTML =html
+                // const html = `<img  src="../assets/gif/25.gif" width="90px">`
+                // window.load.innerHTML =html
                 // document.getElementById("load").append('<img src="../assets/gif/25.gif" width="90px">')
                 axios.post('http://localhost:9000/auth/signin', {
                     username : this.username,
@@ -105,6 +105,7 @@
                                 window.location.href="/admin"
                             }else{
                                 window.location.href="/"
+                                // this.$router.push({name: 'home'})
                             }
                             // this.$router.push({name: 'ProductPage'})
                         }
