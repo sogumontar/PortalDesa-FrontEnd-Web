@@ -10,10 +10,12 @@
         <hr>
         <b-row class="baris-produk justify-content-md-center justify-content-lg-center justify-content-sm-center">
             <b-col class="metric-tarif p-4 m-3 mr-5" v-for="produk in produk.slice(batasbawah, batasatas)" :key="produk.sku" cols="10" col lg="3" sm="8" md="4">
+                <router-link :to="'/detailProduk/'+produk.sku">
                 <b-img
                         rounded=""
                         src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Kecamatan_Balige%2C_Toba_Samosir_02.jpg"
                         fluid></b-img>
+                </router-link>
                 <hr>
                 <h5>Nama: {{ produk.nama }}</h5>
                 <h5>Harga: Rp.{{ produk.harga | numFormat }}</h5>
@@ -113,7 +115,7 @@
                 this.test=test;
                 this.batasatas=(test)*6
                 this.batasbawah=this.batasatas-6
-            }
+            },
         }
     }
 </script>
