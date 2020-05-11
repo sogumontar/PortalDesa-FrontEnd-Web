@@ -58,7 +58,7 @@
                 <b-col cols="8" col md="5" lg="4" sm="7">
                     <b-form-input
                             id="input-kepalaDesa"
-                            v-model="detail.namaKepalaDesa"
+                            v-model="kepalaDesa"
                             required
                             type="text"
                     ></b-form-input>
@@ -74,7 +74,7 @@
                 <b-col cols="8" col md="5" lg="4" sm="7">
                     <b-form-input
                             id="input-jumlah"
-                            v-model="detail.jumlahPenduduk"
+                            v-model="jumlah"
                             required
                             type="number"
                             min="0"
@@ -137,23 +137,28 @@
         methods : {
             async load(){
                 this.sku=localStorage.getItem("sku")
-                const response = await axios.get('http://localhost:9000/desa/desa/skuAdmin/'+this.sku)
+                const response = await axios.get('https://portal-desa.herokuapp.com/desa/desa/skuAdmin/'+this.sku)
                 this.detail=response.data.data
                 console.log(this.detail)
-                const responses = await axios.get('http://localhost:9000/kecamatan/')
+                const responses = await axios.get('https://portal-desa.herokuapp.com/kecamatan/')
                 this.kecamatan = responses.data
+                this.kepalaDesa=this.detail.namaKepalaDesa
+                this.jumlah=this.detail.jumlahPenduduk
+
             },
-            formSubmit(){
-                axios.put('http://localhost:9000/desa/update/'+this.sku, {
+            async formSubmit(){
+                await axios.put('https://portal-desa.herokuapp.com/desa/update/'+this.sku, {
                     nama: this.detail.nama,
-                    namaKepalaDesa: this.detail.kepalaDesa,
+                    namaKepalaDesa: this.kepalaDesa,
                     jumlahPenduduk: this.jumlah,
                     kecamatan : this.detail.kecamatan
                 })
+                .then(
+                    console.log(this.kepalaDesa),
+                    console.log(this.jumlah)
+                )
                     // eslint-disable-next-line no-unused-vars
-                    .then(
-                        this.$router.go('detailDesa')
-                    )
+
             },
             onFileChange(e) {
                 var files = e.target.files || e.dataTransfer.files;
@@ -169,7 +174,7 @@
                 var vm = this;
                 reader.onload = (e) => {
                     vm.image = e.target.result;
-                    axios.put('http://localhost:9000/desa/add/picture', {
+                    axios.put('https://portal-desa.herokuapp.com/desa/add/picture', {
                         base64File : reader.result,
                         skuDesa : localStorage.getItem("sku")
                     }).then(

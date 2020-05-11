@@ -110,23 +110,27 @@
             uploadImage(event){
                 this.selectedFile = event.target.files[0].name
             },
-            formSubmit(e) {
+            async formSubmit(e) {
                 console.log(this.nama)
                 console.log(this.harga)
                 console.log(this.deskripsi)
                 e.preventDefault();
                 let currentObj = this;
-                axios.post('http://localhost:9000/produk/add', {
+                await axios.post('https://portal-desa.herokuapp.com/produk/add', {
                     nama: this.nama,
                     harga: this.harga,
                     deskripsi: this.deskripsi,
                     skuDesa: localStorage.getItem("sku")
+                }, error => {
+                    console.error(error);
                 })
                     // eslint-disable-next-line no-unused-vars
-                    .then(
-                        window.location.href= "/produk"
+                    .then(function (response) {
+
+                        alert("bisa"),
+                            window.location.href = "/produk"
                         // this.$router.go('ProductPage')
-                    )
+                    })
                     .then(function () {
                         this.$router.push({name: 'ProductPage'})
                     })
@@ -151,7 +155,7 @@
                 var vm = this;
                 reader.onload = (e) => {
                     vm.image = e.target.result;
-                    axios.post('http://localhost:9000/produk/add/gambar', {
+                    axios.post('https://portal-desa.herokuapp.com/produk/add/gambar', {
                         gambar : reader.result,
                         nama : localStorage.getItem("sku")
                     }).then(

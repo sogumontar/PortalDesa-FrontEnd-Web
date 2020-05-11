@@ -65,9 +65,9 @@
         },
         methods : {
             async loadData(){
-                const response = await axios.get('http://localhost:9000/adminDev/account/merchant')
+                const response = await axios.get('https://portal-desa.herokuapp.com/adminDev/account/merchant')
                 this.accountMerchant = response.data
-                const responses = await axios.get('http://localhost:9000/adminDev/account/customer')
+                const responses = await axios.get('https://portal-desa.herokuapp.com/adminDev/account/customer')
                 this.accountCustomer=responses.data
                 console.log(responses.data)
             }

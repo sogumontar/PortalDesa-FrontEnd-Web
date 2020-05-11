@@ -49,9 +49,9 @@
                     alert("Anda Belum login")
                     this.$router.push({name: 'Login'})
                 }
-                const response = await axios.get('http://localhost:9000/produk/skuDesa/'+localStorage.getItem("sku"))
+                const response = await axios.get('https://portal-desa.herokuapp.com/produk/skuDesa/'+localStorage.getItem("sku"))
                 this.produk = response.data
-                const responses = await axios.get('http://localhost:9000/desa/desa/skuAdmin/'+localStorage.getItem("sku"))
+                const responses = await axios.get('https://portal-desa.herokuapp.com/desa/desa/skuAdmin/'+localStorage.getItem("sku"))
                 this.detail=responses.data
                 console.log(responses.data)
             },
