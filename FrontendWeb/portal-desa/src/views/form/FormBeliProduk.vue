@@ -1,8 +1,9 @@
 <template>
     <div>
         <div class="container">
-            <h3>Form Pemesanan</h3>
+            <h3></h3>
             <hr>
+
             <div class="mt-4">
                 <b-card class="row">
                     <b-card-text class="col-md-5">
@@ -71,11 +72,18 @@
                 produk: [],
                 detail : [],
                 sku : '',
-                metode : ''
+                metode : '',
             }
         }, async mounted() {
             this.sku=localStorage.getItem('sku')
             this.load()
+            const queryString = window.location.search;
+
+            const urlParams = new URLSearchParams(queryString);
+
+            const page_type = urlParams.get('jumlah')
+
+            console.log(page_type);
         },
         methods: {
             async load() {

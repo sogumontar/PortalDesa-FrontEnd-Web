@@ -4,21 +4,30 @@
         <hr>
         <div>
             <b-row class="justify-content-md-center justify-content-lg-center justify-content-sm-center">
-                <div class="row metric-tarif">
-                    <b-col col lg="auto" md="auto" sm="8" cols="8" class="metric-tarif">
+<!--                <div class="row metric-tarif">-->
+                    <b-col col lg="auto" md="auto" sm="auto" cols="auto" class="">
                         <b-img
                                 rounded=""
                                 src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Kecamatan_Balige%2C_Toba_Samosir_02.jpg"
                                 class="gambar-produk"
                                 fluid>
                         </b-img>
+                        <b-row class="justify-content-md-center justify-content-lg-center justify-content-sm-center mt-4">
+                            <h4><b-icon-dash-circle class="mt-1" @click="kurang_jumlah"></b-icon-dash-circle><b-icon-dash></b-icon-dash></h4>
+                            <h5><p class="metric-tarif">{{ jumlah }}</p></h5>
+                            <h4><b-icon-dash></b-icon-dash><b-icon-plus-circle class="mt-1" @click="tambah_jumlah"></b-icon-plus-circle></h4>
+                        </b-row>
+                        <b-row class="justify-content-md-center justify-content-lg-center justify-content-sm-center">
+                            <router-link :to="'/beliProduk/'+produk.sku+'?jumlah='+jumlah"><b-btn class="btn btn-success mr-3">Pesan</b-btn></router-link>
+                            <b-btn class="btn btn-primary">Keranjang</b-btn>
+                        </b-row>
                     </b-col>
-                    <b-col col lg="auto" md="6" sm="8" cols="8" class="data-produk mt-2">
+                    <b-col col lg="6" md="6" sm="auto" cols="auto" class="data-produk mt-2">
                         <p>Nama Produk : {{produk.nama}}</p>
                         <p>Harga : Rp. {{produk.harga | numFormat}}</p>
                         <p>Deskripsi : <br>{{produk.deskripsi}}</p>
                     </b-col>
-                </div>
+<!--                </div>-->
             </b-row>
 <!--            <center>-->
 <!--                <b-card no-body class="overflow-hidden" style="max-width: 80%;">-->
@@ -58,7 +67,8 @@
         data() {
             return {
                 sku: this.$route.params.sku,
-                produk: []
+                produk: [],
+                jumlah: 1,
             }
         }, async mounted() {
             this.load()
@@ -69,6 +79,15 @@
                 const response = await axios.get('http://localhost:9000/produk/sku/' + this.$route.params.sku)
                 this.produk = response.data
                 console.log(this.produk)
+            },
+            tambah_jumlah(){
+                this.jumlah++;
+            },
+            kurang_jumlah(){
+                if(this.jumlah !== 1){
+                    this.jumlah--;
+                }
+
             }
         }
     }
@@ -85,19 +104,47 @@
     }
 
     .data-produk{
-        font-size: 18px;
+        font-size: 19px;
     }
 
     .metric-tarif{
         -webkit-border-radius: 3px;
         -moz-border-radius: 3px;
         border-radius: 10px;
-        padding: 10px;
-        margin-bottom: 20px;
+        padding: 5px;
+        margin-top: -3px;
+        /*margin-bottom: 20px;*/
         border: 1px solid #DCE6EB;
         font-family:  "Times New Roman";
         -webkit-box-shadow: 0px 2px 5px -2px rgba(0,0,0,0.75);
         -moz-box-shadow: 0px 2px 5px -2px rgba(0,0,0,0.75);
         box-shadow: 0px 2px 5px -2px rgba(0,0,0,0.75);
     }
+
+    @media only screen and (max-width: 600px) {
+        .gambar-produk{
+            width: 360px;
+        }
+    }
+
+    /* Small devices (portrait tablets and large phones, 600px and up) */
+    @media only screen and (min-width: 600px) {
+
+    }
+
+    /* Medium devices (landscape tablets, 768px and up) */
+    @media only screen and (min-width: 768px) {
+
+    }
+
+    /* Large devices (laptops/desktops, 992px and up) */
+    @media only screen and (min-width: 992px) {
+
+    }
+
+    /* Extra large devices (large laptops and desktops, 1200px and up) */
+    @media only screen and (min-width: 1200px) {
+
+    }
+
 </style>
