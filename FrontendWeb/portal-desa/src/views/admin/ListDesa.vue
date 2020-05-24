@@ -35,7 +35,7 @@
         },
         methods: {
             async loadData(){
-                const response = await axios.get('http://localhost:9000/desa/')
+                const response = await axios.get('https://portal-desa.herokuapp.com/desa/')
                 this.desa = response.data
             }
         }

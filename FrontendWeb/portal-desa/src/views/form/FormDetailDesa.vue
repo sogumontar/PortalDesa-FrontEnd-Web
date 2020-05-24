@@ -137,14 +137,14 @@
         methods : {
             async load(){
                 this.sku=localStorage.getItem("sku")
-                const response = await axios.get('http://localhost:9000/desa/desa/skuAdmin/'+this.sku)
+                const response = await axios.get('https://portal-desa.herokuapp.com/desa/desa/skuAdmin/'+this.sku)
                 this.detail=response.data.data
                 console.log(this.detail)
-                const responses = await axios.get('http://localhost:9000/kecamatan/')
+                const responses = await axios.get('https://portal-desa.herokuapp.com/kecamatan/')
                 this.kecamatan = responses.data
             },
             formSubmit(){
-                axios.put('http://localhost:9000/desa/update/'+this.sku, {
+                axios.put('https://portal-desa.herokuapp.com/desa/update/'+this.sku, {
                     nama: this.detail.nama,
                     namaKepalaDesa: this.detail.kepalaDesa,
                     jumlahPenduduk: this.jumlah,
@@ -169,7 +169,7 @@
                 var vm = this;
                 reader.onload = (e) => {
                     vm.image = e.target.result;
-                    axios.put('http://localhost:9000/desa/add/picture', {
+                    axios.put('https://portal-desa.herokuapp.com/desa/add/picture', {
                         base64File : reader.result,
                         skuDesa : localStorage.getItem("sku")
                     }).then(

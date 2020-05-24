@@ -8,7 +8,7 @@
                     <b-col col lg="auto" md="auto" sm="auto" cols="auto" class="">
                         <b-img
                                 rounded=""
-                                src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Kecamatan_Balige%2C_Toba_Samosir_02.jpg"
+                                :src="'https://portal-desa.herokuapp.com'+produk.gambar"
                                 class="gambar-produk"
                                 fluid>
                         </b-img>
@@ -18,8 +18,8 @@
                             <h4><b-icon-dash></b-icon-dash><b-icon-plus-circle class="mt-1" @click="tambah_jumlah"></b-icon-plus-circle></h4>
                         </b-row>
                         <b-row class="justify-content-md-center justify-content-lg-center justify-content-sm-center">
-                            <router-link :to="'/beliProduk/'+produk.sku+'?jumlah='+jumlah"><b-btn class="btn btn-success mr-3">Pesan</b-btn></router-link>
-                            <b-btn class="btn btn-primary">Keranjang</b-btn>
+                            <router-link :to="'/beliProduk/'+produk.sku+'?jumlah='+jumlah"><b-btn class="btn btn-primary mr-3">Pesan Langsung</b-btn></router-link>
+                            <button  @click="addToCart" class="btn btn-success">Keranjang</button>
                         </b-row>
                     </b-col>
                     <b-col col lg="6" md="6" sm="auto" cols="auto" class="data-produk mt-2">
@@ -27,6 +27,7 @@
                         <p>Harga : Rp. {{produk.harga | numFormat}}</p>
                         <p>Deskripsi : <br>{{produk.deskripsi}}</p>
                     </b-col>
+
 <!--                </div>-->
             </b-row>
 <!--            <center>-->
@@ -55,6 +56,8 @@
 <!--            </center>-->
 <!--            <br><br>-->
         </div>
+        <br><br><br><br>
+        <br><br><br><br>
     </div>
 </template>
 
@@ -69,14 +72,22 @@
                 sku: this.$route.params.sku,
                 produk: [],
                 jumlah: 1,
+                skuDesa: '',
+                harga: 0,
+                skuCustomer: '',
+                idProduk: ''
             }
         }, async mounted() {
             this.load()
+            this.skuCustomer = localStorage.getItem("sku")
+            this.idProduk =this.$route.params.sku
+            console.log(this.idProduk)
+            console.log(this.skuCustomer)
         },
         methods: {
             async load() {
                 console.log(this.$route.params.sku)
-                const response = await axios.get('http://localhost:9000/produk/sku/' + this.$route.params.sku)
+                const response = await axios.get('https://portal-desa.herokuapp.com/produk/sku/' + this.$route.params.sku)
                 this.produk = response.data
                 console.log(this.produk)
             },
@@ -88,6 +99,17 @@
                     this.jumlah--;
                 }
 
+            },
+            async addToCart(){
+                const response = await axios.post('https://portal-desa.herokuapp.com/keranjang/save', {
+                    idCustomer : this.skuCustomer,
+                    idProduk : this.idProduk,
+                    jumlah: this.jumlah,
+                    skuDesa: this.produk.skuDesa,
+                    harga: this.produk.harga
+                }).then(this.$router.push('/keranjang'))
+
+                console.log(response)
             }
         }
     }

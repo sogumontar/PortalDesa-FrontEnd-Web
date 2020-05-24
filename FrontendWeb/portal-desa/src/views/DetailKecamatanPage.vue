@@ -39,7 +39,7 @@
         }, devServer: {
             proxy: {
                 '^/api/': {
-                    target: "http://localhost:9000/desa/+'this.$route.params.sku'",
+                    target: "https://portal-desa.herokuapp.com/desa/+'this.$route.params.sku'",
                     changeOrigin: true
                 }
             }
@@ -48,7 +48,7 @@
         },
         methods: {
             async load() {
-                const response = await axios.get('http://localhost:9000/desa/kecamatan/'+this.$route.params.sku)
+                const response = await axios.get('https://portal-desa.herokuapp.com/desa/kecamatan/'+this.$route.params.sku)
                 this.produk = response.data
                 console.log(this.produk)
             }

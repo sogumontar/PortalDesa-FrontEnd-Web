@@ -16,7 +16,7 @@
        devServer: {
            proxy:{
                '^/api/':{
-                   target:'http://localhost:9000/wisata/',
+                   target:'https://portal-desa.herokuapp.com/wisata/',
                    changeOrigin: true
                }
            }
@@ -32,7 +32,7 @@
         },
         methods:{
            async load(){
-               const response = await axios.get('http://localhost:9000/wisata/')
+               const response = await axios.get('https://portal-desa.herokuapp.com/wisata/')
                this.wisata =response.data
            }
         }

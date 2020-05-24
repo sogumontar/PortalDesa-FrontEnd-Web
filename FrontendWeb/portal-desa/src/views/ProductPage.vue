@@ -13,7 +13,7 @@
                 <router-link :to="'/detailProduk/'+produk.sku">
                 <b-img
                         rounded=""
-                        src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Kecamatan_Balige%2C_Toba_Samosir_02.jpg"
+                        :src="'https://portal-desa.herokuapp.com'+produk.gambar"
                         fluid></b-img>
                 </router-link>
                 <hr>
@@ -67,14 +67,14 @@
                 }
 
                 if(localStorage.getItem('role') === "ROLE_USER"){
-                    const response = await axios.get('http://localhost:9000/produk/')
+                    const response = await axios.get('https://portal-desa.herokuapp.com/produk/')
                     this.produk = response.data
                 }else if (localStorage.getItem('role') === "ROLE_MERCHANT"){
-                    const response = await axios.get('http://localhost:9000/produk/skuDesa/'+localStorage.getItem("sku"))
+                    const response = await axios.get('https://portal-desa.herokuapp.com/produk/skuDesa/'+localStorage.getItem("sku"))
                     this.produk = response.data
                 }
 
-                const responses = await axios.get('http://localhost:9000/desa/desa/skuAdmin/'+localStorage.getItem("sku"))
+                const responses = await axios.get('https://portal-desa.herokuapp.com/desa/desa/skuAdmin/'+localStorage.getItem("sku"))
                 this.detail=responses.data
                 console.log(responses.data)
             },

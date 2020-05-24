@@ -154,7 +154,7 @@
                 if (this.password !== this.confirmPassword) {
                     alert("Password harus sama")
                 } else {
-                    axios.post('http://localhost:9000/auth/signup', {
+                    axios.post('https://portal-desa.herokuapp.com//auth/signup', {
                         name: this.name,
                         username: this.username,
                         email: this.email,

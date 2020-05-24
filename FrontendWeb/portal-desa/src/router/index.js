@@ -16,6 +16,7 @@ import DetailDesaAdmin from "../views/admin/DetailDesaAdmin";
 import DetailProdukPage from "../views/DetailProdukPage";
 import FormBeliProduk from "../views/form/FormBeliProduk";
 import DaftarPesananCustomer from "../views/customer/DaftarPesananCustomer";
+import KeranjangPage from "../views/KeranjangPage";
 
 Vue.use(VueRouter);
 
@@ -24,6 +25,11 @@ const routes = [
     path: "/",
     name: "Home",
     component: JhomePage
+  },
+  {
+    path: "/keranjang",
+    name: "keranjang",
+    component: KeranjangPage
   },
   {
     path: "/daftarPesanan",
