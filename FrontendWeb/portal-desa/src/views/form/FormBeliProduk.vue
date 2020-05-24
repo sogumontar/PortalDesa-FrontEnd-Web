@@ -1,30 +1,49 @@
 <template>
     <div>
         <div class="container">
-            <h3></h3>
+            <h1 class="judul mt-3">Form Pemesanan</h1>
             <hr>
+            <div class="mt-4 p-3 ml-2">
+                <b-row>
+                    <b-col cols="auto" col lg="auto" md="auto"  sm="auto">
+                        <h5>Alamat : <span v-if="detail.length!=0">{{ detail.alamat }}
+                        </span><span v-else>Anda Belom Menambahkan Alamat</span></h5>
+                    </b-col>
+                </b-row>
 
-            <div class="mt-4">
-                <b-card class="row">
-                    <b-card-text class="col-md-5">
-                        <p>Alamat : {{detail.alamat}}</p>
-                        <b-btn v-if="detail.length!=0"  @click="show" class="btn btn-info">Ubah</b-btn>
-                        <b-btn v-else class="btn btn-info" @click="show">isi</b-btn>
-                    </b-card-text>
-                    <b-card-text class="col-md-5">
-                        <p>Total Pembayaran : Rp.{{produk.harga}} </p>
-                        <!--                        <b-btn v-if="produk.length!=1" class="btn btn-info">Ubah</b-btn>-->
-                    </b-card-text>
-                    <b-card-text class="col-md-5">
-                        <p>Metode Pembayaran : </p>
-                        <select class="form-control" v-model="metode">
-                            <option value="COD">COD</option>
-                            <option value="ATM">ATM</option>
-                            <option value="Indomaret">Indomaret</option>
-                        </select>
-                    </b-card-text>
-                    <b-btn variant="success" @click="submit">Selesai</b-btn>
-                </b-card>
+                <b-row>
+                    <b-col>
+                        <b-button v-if="detail.length!=0" variant="primary" @click="show">Ubah Alamat</b-button>
+                        <b-button v-else variant="primary" @click="show" size="sm">Tambah Alamat</b-button>
+                    </b-col>
+                </b-row>
+
+                <b-row class="mt-4">
+                    <b-col cols="auto" col lg="auto" md="auto"  sm="auto">
+                        <h5>Total Pembayaran : Rp. {{ produk.harga*jumlah | numFormat }}</h5>
+                        <b-button variant="primary" @click="show" size="sm">Detail</b-button>
+                    </b-col>
+                </b-row>
+<!--                <b-card class="row">-->
+<!--                    <b-card-text class="col-md-5">-->
+<!--                        <p>Alamat : {{detail.alamat}}</p>-->
+<!--                        <b-btn v-if="detail.length!=0"  @click="show" class="btn btn-info">Ubah</b-btn>-->
+<!--                        <b-btn v-else class="btn btn-info" @click="show">isi</b-btn>-->
+<!--                    </b-card-text>-->
+<!--                    <b-card-text class="col-md-5">-->
+<!--                        <p>Total Pembayaran : Rp.{{produk.harga | numFormat}} </p>-->
+<!--                        &lt;!&ndash;                        <b-btn v-if="produk.length!=1" class="btn btn-info">Ubah</b-btn>&ndash;&gt;-->
+<!--                    </b-card-text>-->
+<!--                    <b-card-text class="col-md-5">-->
+<!--                        <p>Metode Pembayaran : </p>-->
+<!--                        <select class="form-control" v-model="metode">-->
+<!--                            <option value="COD">COD</option>-->
+<!--                            <option value="ATM">ATM</option>-->
+<!--                            <option value="Indomaret">Indomaret</option>-->
+<!--                        </select>-->
+<!--                    </b-card-text>-->
+<!--                    <b-btn variant="success" @click="submit">Selesai</b-btn>-->
+<!--                </b-card>-->
                 <modal name="hello-world">
                     <b-form @submit="formSubmit" class="mt-3" >
                         <b-form-row class="justify-content-sm-center mt-3">
@@ -73,6 +92,7 @@
                 detail : [],
                 sku : '',
                 metode : '',
+                jumlah: 0,
             }
         }, async mounted() {
             this.sku=localStorage.getItem('sku')
@@ -81,17 +101,17 @@
 
             const urlParams = new URLSearchParams(queryString);
 
-            const page_type = urlParams.get('jumlah')
+            const page_type = urlParams.get('jumlah');
 
-            console.log(page_type);
+            this.jumlah = parseInt(page_type);
         },
         methods: {
             async load() {
                 console.log(this.$route.params.sku)
                 const response = await axios.get('http://localhost:9000/produk/sku/' + this.$route.params.sku)
                 this.produk = response.data
-                const  responses = await axios.get('http://localhost:9000/customer/' + localStorage.getItem('sku'))
-                this.detail=responses.data
+                    const  responses = await axios.get('http://localhost:9000/customer/' + localStorage.getItem('sku'))
+                    this.detail=responses.data
                 console.log(this.detail)
             },
             show () {
@@ -141,5 +161,8 @@
 </script>
 
 <style scoped>
-
+    .judul{
+        text-align: left;
+        font-family: "Arial Black";
+    }
 </style>
