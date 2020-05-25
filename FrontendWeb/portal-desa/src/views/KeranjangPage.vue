@@ -2,12 +2,16 @@
     <div>
         <div class="container">
             <h1 class="judul mt-3">Keranjang</h1>
-<!--            <div class="row">-->
-<!--                <div v-for="keranjang in keranjang" :key="keranjang.id">-->
-<!--                    <h2>{{keranjang.idProduk}}</h2>-->
-<!--                    <br><br><br>-->
-<!--                </div>-->
-<!--            </div>-->
+            <div class="row">
+                <div v-for="keranjang in keranjang" :key="keranjang.id">
+                    <img width="50px" :src="'https://portal-desa.herokuapp.com'+keranjang[1].gambar" alt="">
+                    <h2>{{keranjang[1].nama}}</h2>
+                    <p>Jumlah : {{keranjang[0].jumlah}}</p>
+                    <p>Harga per/pcs : {{keranjang[1].harga}}</p>
+                    <p>Harga Total : {{keranjang[0].harga}}</p>
+                    <br><br><br>
+                </div>
+            </div>
             <hr>
             <div class="mt-4 p-3 ml-2">
                 <b-row>
@@ -139,7 +143,7 @@
                 this.$modal.hide('hello-world');
             },
             async getKeranjang(){
-                const response = await axios.get('https://portal-desa.herokuapp.com/keranjang/customer/' + this.sku)
+                const response = await axios.get('https://portal-desa.herokuapp.com/keranjang/web/customer/' + this.sku)
                 this.keranjang = response.data
                 console.log(this.keranjang)
             },
