@@ -167,7 +167,7 @@
                         currentObj.responses = response.data;
                         if (response.data.accessToken) {
                             localStorage.setItem('token', response.data.accessToken)
-                            localStorage.setItem('role', response.data.role)
+                            localStorage.setItem('role', "ROLE_USER")
                             localStorage.setItem('sku', response.data.skuLog)
                             localStorage.setItem('nickName', response.data.nickName)
                             localStorage.setItem('setupTime', now)
