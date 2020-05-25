@@ -3,23 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4d012e33-cefd-4315-b919-c84c6998ef15" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendWeb/portal-desa/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendWeb/portal-desa/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendWeb/portal-desa/src/views/DesaPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendWeb/portal-desa/src/views/DesaPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendWeb/portal-desa/src/views/DetailKecamatanPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendWeb/portal-desa/src/views/DetailKecamatanPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendWeb/portal-desa/src/views/DetailProdukPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendWeb/portal-desa/src/views/DetailProdukPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendWeb/portal-desa/src/views/JhomePage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendWeb/portal-desa/src/views/JhomePage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendWeb/portal-desa/src/views/JloginPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendWeb/portal-desa/src/views/JloginPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendWeb/portal-desa/src/views/JregisterPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendWeb/portal-desa/src/views/JregisterPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendWeb/portal-desa/src/views/ProductPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendWeb/portal-desa/src/views/ProductPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendWeb/portal-desa/src/views/admin/Dashboard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendWeb/portal-desa/src/views/admin/Dashboard.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendWeb/portal-desa/src/views/admin/DetailDesaAdmin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendWeb/portal-desa/src/views/admin/DetailDesaAdmin.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendWeb/portal-desa/src/views/admin/ListAccount.vue" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendWeb/portal-desa/src/views/admin/ListAccount.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendWeb/portal-desa/src/views/admin/ListDesa.vue" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendWeb/portal-desa/src/views/admin/ListDesa.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendWeb/portal-desa/src/views/customer/DaftarPesananCustomer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendWeb/portal-desa/src/views/customer/DaftarPesananCustomer.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendWeb/portal-desa/src/views/form/CreateProdukForm.vue" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendWeb/portal-desa/src/views/form/CreateProdukForm.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendWeb/portal-desa/src/views/form/DaftarAdminDesa.vue" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendWeb/portal-desa/src/views/form/DaftarAdminDesa.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendWeb/portal-desa/src/views/form/FormBeliProduk.vue" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendWeb/portal-desa/src/views/form/FormBeliProduk.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendWeb/portal-desa/src/views/form/FormDetailDesa.vue" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendWeb/portal-desa/src/views/form/FormDetailDesa.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontendWeb/portal-desa/src/views/KeranjangPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendWeb/portal-desa/src/views/KeranjangPage.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,7 +61,8 @@
       <option name="presentableId" value="Default" />
       <updated>1587973805261</updated>
       <workItem from="1587973819666" duration="599000" />
-      <workItem from="1590330260086" duration="6368000" />
+      <workItem from="1590330260086" duration="6586000" />
+      <workItem from="1590370723467" duration="1323000" />
     </task>
     <servers />
   </component>
