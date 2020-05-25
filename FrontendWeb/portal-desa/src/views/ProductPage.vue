@@ -14,11 +14,12 @@
                 <b-img
                         rounded=""
                         :src="'https://portal-desa.herokuapp.com'+produk.gambar"
-                        fluid></b-img>
+                        fluid
+                        class="gambar-produk"></b-img>
                 </router-link>
                 <hr>
                 <h5>Nama: {{ produk.nama }}</h5>
-                <h5>Harga: Rp.{{ produk.harga | numFormat }}</h5>
+                <h5>Harga: Rp. {{ produk.harga | numFormat }}</h5>
             </b-col>
         </b-row>
         <b-row class="justify-content-md-center justify-content-lg-center justify-content-sm-center mt-2 mb-3" style="margin-left: -45px">
@@ -137,6 +138,11 @@
         -webkit-box-shadow: 0px 2px 5px -2px rgba(0,0,0,0.75);
         -moz-box-shadow: 0px 2px 5px -2px rgba(0,0,0,0.75);
         box-shadow: 0px 2px 5px -2px rgba(0,0,0,0.75);
+    }
+
+    .gambar-produk{
+        width: 100%;
+        height: 170px;
     }
 
 </style>

@@ -2,12 +2,12 @@
     <div>
         <div class="container">
             <h1 class="judul mt-3">Keranjang</h1>
-            <div class="row">
-                <div v-for="keranjang in keranjang" :key="keranjang.id">
-                    <h2>{{keranjang.idProduk}}</h2>
-                    <br><br><br>
-                </div>
-            </div>
+<!--            <div class="row">-->
+<!--                <div v-for="keranjang in keranjang" :key="keranjang.id">-->
+<!--                    <h2>{{keranjang.idProduk}}</h2>-->
+<!--                    <br><br><br>-->
+<!--                </div>-->
+<!--            </div>-->
             <hr>
             <div class="mt-4 p-3 ml-2">
                 <b-row>
@@ -166,5 +166,8 @@
 
 
 <style scoped>
-
+    .judul{
+        text-align: left;
+        font-family: "Arial Black";
+    }
 </style>
