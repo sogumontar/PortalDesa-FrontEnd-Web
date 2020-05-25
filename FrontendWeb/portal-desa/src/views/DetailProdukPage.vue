@@ -2,34 +2,37 @@
     <div class="container">
         <h1 class="judul mt-3">Detail Produk</h1>
         <hr>
-        <div>
+        <div class="mt-5">
             <b-row class="justify-content-md-center justify-content-lg-center justify-content-sm-center">
-<!--                <div class="row metric-tarif">-->
-                    <b-col col lg="auto" md="auto" sm="auto" cols="auto" class="">
+                <b-col col sm="auto">
+
+                </b-col>
+                    <b-col col lg="auto" md="auto" sm="auto" cols="12">
                         <b-img
                                 rounded=""
                                 :src="'https://portal-desa.herokuapp.com'+produk.gambar"
                                 class="gambar-produk"
                                 fluid>
                         </b-img>
-                        <b-row class="justify-content-md-center justify-content-lg-center justify-content-sm-center mt-4">
-                            <h4><b-icon-dash-circle class="mt-1" @click="kurang_jumlah"></b-icon-dash-circle><b-icon-dash></b-icon-dash></h4>
-                            <h5><p class="metric-tarif">{{ jumlah }}</p></h5>
-                            <h4><b-icon-dash></b-icon-dash><b-icon-plus-circle class="mt-1" @click="tambah_jumlah"></b-icon-plus-circle></h4>
-                        </b-row>
-                        <b-row class="justify-content-md-center justify-content-lg-center justify-content-sm-center">
-                            <router-link :to="'/beliProduk/'+produk.sku+'?jumlah='+jumlah"><b-btn class="btn btn-primary mr-3">Pesan Langsung</b-btn></router-link>
-                            <button  @click="addToCart" class="btn btn-success">Keranjang</button>
-                        </b-row>
                     </b-col>
                     <b-col col lg="6" md="6" sm="auto" cols="auto" class="data-produk mt-2">
                         <p>Nama Produk : {{produk.nama}}</p>
                         <p>Harga : Rp. {{produk.harga | numFormat}}</p>
                         <p>Deskripsi : <br>{{produk.deskripsi}}</p>
                     </b-col>
-
-<!--                </div>-->
             </b-row>
+            <div class="tombol">
+                <b-row class="justify-content-md-center justify-content-lg-center justify-content-sm-center">
+                    <h4><b-icon-dash-circle class="mt-1" @click="kurang_jumlah"></b-icon-dash-circle><b-icon-dash></b-icon-dash></h4>
+                    <h5><p class="metric-tarif">{{ jumlah }}</p></h5>
+                    <h4><b-icon-dash></b-icon-dash><b-icon-plus-circle class="mt-1" @click="tambah_jumlah"></b-icon-plus-circle></h4>
+                </b-row>
+                <b-row class="justify-content-md-center justify-content-lg-center justify-content-sm-center">
+                    <router-link :to="'/beliProduk/'+produk.sku+'?jumlah='+jumlah"><b-btn class="btn btn-primary mr-3">Pesan Langsung</b-btn></router-link>
+                    <button  @click="addToCart" class="btn btn-success">Keranjang</button>
+                </b-row>
+            </div>
+
 <!--            <center>-->
 <!--                <b-card no-body class="overflow-hidden" style="max-width: 80%;">-->
 <!--                    <b-row no-gutters class="metric-tarif">-->
@@ -121,10 +124,6 @@
         font-family: "Arial Black";
     }
 
-    .gambar-produk{
-        width: 300px;
-    }
-
     .data-produk{
         font-size: 19px;
     }
@@ -144,29 +143,51 @@
     }
 
     @media only screen and (max-width: 600px) {
+        /*.gambar-produk{*/
+        /*    width: 360px;*/
+        /*}*/
+
         .gambar-produk{
-            width: 360px;
+            width: 100%;
+            height: 300px;
         }
     }
 
     /* Small devices (portrait tablets and large phones, 600px and up) */
     @media only screen and (min-width: 600px) {
-
+        .gambar-produk{
+            width: 400px;
+            height: 250px;
+        }
     }
 
     /* Medium devices (landscape tablets, 768px and up) */
     @media only screen and (min-width: 768px) {
-
+        .gambar-produk{
+            width: 300px;
+            height: 200px;
+        }
+        .tombol{
+            margin-top: 20px;
+        }
     }
 
     /* Large devices (laptops/desktops, 992px and up) */
     @media only screen and (min-width: 992px) {
-
+        .gambar-produk{
+            width: 300px;
+            height: 200px;
+        }
     }
 
     /* Extra large devices (large laptops and desktops, 1200px and up) */
     @media only screen and (min-width: 1200px) {
-
+        .gambar-produk{
+            width: 300px;
+            height: 200px;
+        }
     }
+
+
 
 </style>
