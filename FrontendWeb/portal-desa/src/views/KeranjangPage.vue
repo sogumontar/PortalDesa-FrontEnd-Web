@@ -28,7 +28,7 @@
 
                         </b-col>
                         <b-col>
-                            <b-button variant="primary" size="lg">Pesan</b-button>
+                            <b-button variant="primary" size="lg" v-if="keranjang.length!=0">Pesan</b-button>
                         </b-col>
                     </b-row>
 

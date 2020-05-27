@@ -5,22 +5,33 @@
             <hr>
             <div class="mt-4 p-3 ml-2">
                 <b-row>
-                    <b-col cols="auto" col lg="auto" md="auto"  sm="auto">
-                        <h5>Alamat : <input type="text" class="form-control" v-if="detail.length!=0" v-model="detail.alamat"></h5>
+                    <b-col col lg="3">
+                        <h5>Alamat</h5>
+                    </b-col>
+                    <b-col col lg="auto">
+                        <h5>:</h5>
+                    </b-col>
+                    <b-col cols="auto" col lg="3" md="auto"  sm="auto">
+                        <b-form-input size="sm" type="text" class="form-control" v-if="detail.length!=0" v-model="detail.alamat"></b-form-input>
+                    </b-col>
+                    <b-col col lg="auto" offset-lg="1">
+                        <b-button v-if="detail.length!=0" variant="primary" @click="ubah" size="sm">Ubah Alamat</b-button>
+                        <b-button v-else variant="primary" @click="show" size="sm">Tambah Alamat</b-button>
                     </b-col>
                 </b-row>
 
-                <b-row>
-                    <b-col>
-                        <b-button v-if="detail.length!=0" variant="primary" @click="ubah">Ubah Alamat</b-button>
-                        <b-button v-else variant="primary" @click="tambahAlamat" size="sm">Tambah Alamat</b-button>
+                <b-row class="mt-5">
+                    <b-col col lg="3">
+                        <h5>Total Pembayaran</h5>
                     </b-col>
-                </b-row>
-
-                <b-row class="mt-4">
-                    <b-col cols="auto" col lg="auto" md="auto"  sm="auto">
-                        <h5>Total Pembayaran : Rp. {{ produk.harga*jumlah | numFormat }}</h5>
-                        <b-button variant="primary" @click="show" size="sm">Detail</b-button>
+                    <b-col col lg="auto">
+                        <h5> : </h5>
+                    </b-col>
+                    <b-col cols="auto" col lg="3" md="auto"  sm="auto" >
+                        <h5>Rp. {{ produk.harga*jumlah | numFormat }}</h5>
+                    </b-col>
+                    <b-col col lg="auto" offset-lg="1">
+                        <b-button variant="primary" @click="show" size="sm">Detail Pesanan</b-button>
                     </b-col>
                 </b-row>
 <!--                <b-card class="row">-->
@@ -43,6 +54,24 @@
 <!--                    </b-card-text>-->
 <!--                    <b-btn variant="success" @click="submit">Selesai</b-btn>-->
 <!--                </b-card>-->
+                <b-row class="mt-5">
+                    <b-col cols="auto" col lg="3">
+                        <h5>Metode Pembayaran</h5>
+                    </b-col>
+                    <b-col col lg="auto">
+                        <h5> : </h5>
+                    </b-col>
+                    <b-col cols="12" col lg="3">
+                        <b-form-select v-model="metode" :options="pilihan_metode" size="sm" required></b-form-select>
+                    </b-col>
+                </b-row>
+
+                <b-row class="mt-5">
+                    <b-col col lg="auto">
+                        <b-button variant="success">Pesan</b-button>
+                    </b-col>
+                </b-row>
+
                 <modal name="hello-world">
                     <b-form @submit="formSubmit" class="mt-3" >
                         <b-form-row class="justify-content-sm-center mt-3">
@@ -91,6 +120,13 @@
                 detail : [],
                 sku : '',
                 metode : '',
+                pilihan_metode : [
+                    { value : 'Bank BRI', text : 'Bank BRI'},
+                    { value : 'Bank Mandiri', text : 'Bank Mandiri'},
+                    { value : 'Bank BNI', text : 'Bank BNI'},
+                    { value : 'Indomaret', text : 'Indomaret'},
+                    { value : 'Alfamart', text :'Alfamart'}
+                ],
                 jumlah: 0,
             }
         }, async mounted() {
@@ -111,7 +147,7 @@
                 this.produk = response.data
                     const  responses = await axios.get('https://portal-desa.herokuapp.com/customer/' + localStorage.getItem('sku'))
                     this.detail=responses.data
-                console.log(this.detail)
+                // console.log(this.detail)
             },
             show () {
                 this.$modal.show('hello-world');
@@ -123,7 +159,7 @@
                 await axios.put('https://portal-desa.herokuapp.com/customer/update/' + this.sku,{
                     sku : this.sku,
                     alamat: this.detail.alamat
-                })
+                }).then(alert("Alamat berhasil di ubah"))
 
             },
             async tambahAlamat () {

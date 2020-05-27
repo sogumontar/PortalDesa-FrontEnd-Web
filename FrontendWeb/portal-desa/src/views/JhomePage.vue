@@ -1,14 +1,14 @@
 <template>
     <b-container class="mt-4">
         <b-row>
-            <b-col xl="8">
+            <b-col>
                 <p id="judul">Selamat datang di Aplikasi Portal Desa.</p>
                 <p>Aplikasi dari Kabupaten Toba yang menyediakan informasi setiap
                     desa yang terdapat di Kabupaten Toba</p>
             </b-col>
         </b-row>
         <hr>
-        <div right v-if="kecamatan.length!=0">
+        <div v-if="kecamatan.length!=0">
             <b-row v-if="authenticated" class="">
                     <b-col cols="12" col lg="4" sm="12" md="6" class="p-4" v-for="kecamatan in kecamatan.slice(batasbawah, batasatas)" :key="kecamatan.sku">
                         <router-link  :to="'/detailKecamatan/'+kecamatan.nama"><h5>{{kecamatan.nama}}</h5></router-link>

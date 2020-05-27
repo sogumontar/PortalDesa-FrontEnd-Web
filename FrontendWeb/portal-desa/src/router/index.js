@@ -17,6 +17,8 @@ import DetailProdukPage from "../views/DetailProdukPage";
 import FormBeliProduk from "../views/form/FormBeliProduk";
 import DaftarPesananCustomer from "../views/customer/DaftarPesananCustomer";
 import KeranjangPage from "../views/KeranjangPage";
+import JpenginapanPage from "../views/JpenginapanPage";
+import JformTambahPenginapan from "../views/form/JformTambahPenginapan";
 
 Vue.use(VueRouter);
 
@@ -114,6 +116,16 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue")
+  },
+  {
+    path: "/penginapan",
+    name: "JpenginapanPage",
+    component: JpenginapanPage
+  },
+  {
+    path: "/penginapan/create",
+    name: "JformTambahPenginapan",
+    component: JformTambahPenginapan
   }
 ];
 
