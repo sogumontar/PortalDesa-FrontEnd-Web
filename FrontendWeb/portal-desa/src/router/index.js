@@ -19,6 +19,7 @@ import DaftarPesananCustomer from "../views/customer/DaftarPesananCustomer";
 import KeranjangPage from "../views/KeranjangPage";
 import JpenginapanPage from "../views/JpenginapanPage";
 import JformTambahPenginapan from "../views/form/JformTambahPenginapan";
+import JdetailPenginapanPage from "../views/JdetailPenginapanPage";
 
 Vue.use(VueRouter);
 
@@ -126,6 +127,11 @@ const routes = [
     path: "/penginapan/create",
     name: "JformTambahPenginapan",
     component: JformTambahPenginapan
+  },
+  {
+    path: "/penginapan/detail",
+    name: "JdetailPenginapanPage",
+    component: JdetailPenginapanPage
   }
 ];
 

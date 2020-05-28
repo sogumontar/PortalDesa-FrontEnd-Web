@@ -4,25 +4,19 @@
         <hr>
         <b-row>
             <b-col>
-                <router-link to="/penginapan/create" class="btn btn-primary">Tambah Penginapan</router-link>
+                <router-link to="/penginapan/create" class="btn btn-primary" v-if="merchant">Tambah Penginapan</router-link>
 <!--                <b-button variant="primary"><b-icon-plus></b-icon-plus> Tambah Penginapan</b-button>-->
             </b-col>
         </b-row>
         <div right v-if="penginapan.length!==0">
-            <b-row v-if="authenticated" class="">
+            <b-row class="">
                 <b-col cols="12" col lg="4" sm="12" md="6" class="p-4" v-for="penginapan in penginapan.slice(batasbawah, batasatas)" :key="penginapan.sku">
-                    <router-link  :to="'/penginapan'"><h5>{{penginapan.nama}}</h5></router-link>
+                    <router-link  :to="'/penginapan/detail'">
+                    <h5 style="color: black; text-decoration: none">{{penginapan.nama}}</h5>
                     <b-img rounded=""
                            :src="'https://s1.bukalapak.com/uploads/content_attachment/13aa121810e8d76210ec1fb5/w-744/penginapan_murah_di_batu_malang.jpg'"
                            fluid width="500px" height="500px"></b-img>
-                </b-col>
-            </b-row>
-            <b-row v-else class="">
-                <b-col cols="12" col lg="4" sm="12" md="6" class="p-4" v-for="penginapan in penginapan.slice(batasbawah, batasatas)" :key="penginapan.sku">
-                    <h5>{{penginapan.nama}}</h5>
-                    <b-img rounded=""
-                           :src="'https://s1.bukalapak.com/uploads/content_attachment/13aa121810e8d76210ec1fb5/w-744/penginapan_murah_di_batu_malang.jpg'"
-                           fluid width="500px" height="500px"></b-img>
+                    </router-link>
                 </b-col>
             </b-row>
         </div>
@@ -89,8 +83,12 @@
         name: "JpenginapanPage",
         data(){
             var val = false;
+            var check = false;
             if(localStorage.getItem('token')){
                 val=true
+                if(localStorage.getItem('role')==='ROLE_MERCHANT'){
+                    check = true;
+                }
             }
             return{
                 penginapan: [
@@ -131,6 +129,7 @@
                 batasbawah: 0,
                 batasatas: 6,
                 test: 1,
+                merchant: check,
             }
         },
         methods: {
