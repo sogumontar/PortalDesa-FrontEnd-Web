@@ -3,7 +3,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <div >
       <b-navbar id="navb" toggleable="lg" type="dark" >
-        <b-navbar-brand href="#"><img alt="Vue logo" src="./assets/pict/logo.png" width="30px" ></b-navbar-brand>
+        <b-navbar-brand href="/"><img alt="Vue logo" src="./assets/pict/logo.png" width="30px" ></b-navbar-brand>
 
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -17,6 +17,7 @@
             <b-navbar-nav class="mr-4">
               <b-nav-item v-if="role!='ROLE_ADMIN'" ><router-link to="/produk">Produk</router-link></b-nav-item>
               <b-nav-item v-if="role!='ROLE_ADMIN'"><router-link to="/desa">Desa</router-link> </b-nav-item>
+              <b-nav-item v-if="role!='ROLE_ADMIN'"><router-link to="/penginapan">Penginapan</router-link> </b-nav-item>
               <b-nav-item v-if="role=='ROLE_ADMIN'" ><router-link to="/admin/account">Data Akun</router-link></b-nav-item>
               <b-nav-item v-if="role=='ROLE_ADMIN'"><router-link to="/admin/desa">Data Desa</router-link> </b-nav-item>
             </b-navbar-nav>
@@ -24,7 +25,7 @@
 <!--            <img alt="Vue logo" src="./assets/pict/profile.png" width="45px" height="45px" >-->
             <b-nav-item-dropdown  right class="">
               <b-dropdown-item v-if="authenticated"><router-link to="/">Profile</router-link></b-dropdown-item>
-              <b-dropdown-item v-if="authenticated"><router-link to="/">Keranjang</router-link></b-dropdown-item>
+              <b-dropdown-item v-if="authenticated"><router-link to="/keranjang">Keranjang</router-link></b-dropdown-item>
               <b-dropdown-item v-if="authenticated"><router-link to="/">Pesanan</router-link></b-dropdown-item>
               <b-dropdown-item v-if="role=='ROLE_ADMIN'"><router-link to="/daftarAdmin">Daftar Admin Desa</router-link></b-dropdown-item>
               <b-dropdown-item ><a  v-on:click="logout" v-if="authenticated" href="/">Logout</a><router-link v-else to="/login">Login</router-link></b-dropdown-item>

@@ -116,7 +116,7 @@
                 console.log(this.deskripsi)
                 e.preventDefault();
                 let currentObj = this;
-                await axios.post('https://portal-desa.herokuapp.com/produk/add', {
+                axios.post('https://portal-desa.herokuapp.com/produk/add', {
                     nama: this.nama,
                     harga: this.harga,
                     deskripsi: this.deskripsi,
@@ -156,7 +156,7 @@
                 reader.onload = (e) => {
                     vm.image = e.target.result;
                     console.log(e.target.result)
-                    axios.post('http://localhost:9000/produk/update/gambar', {
+                    axios.post('https://portal-desa.herokuapp.com/produk/add/gambar', {
                         gambar : reader.result,
                         nama : "/produk/get/PINT-0001-18.png"
                     }).then(

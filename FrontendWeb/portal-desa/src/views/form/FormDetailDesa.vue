@@ -146,8 +146,8 @@
                 this.jumlah=this.detail.jumlahPenduduk
 
             },
-            async formSubmit(){
-                await axios.put('https://portal-desa.herokuapp.com/desa/update/'+this.sku, {
+            formSubmit(){
+                axios.put('https://portal-desa.herokuapp.com/desa/update/'+this.sku, {
                     nama: this.detail.nama,
                     namaKepalaDesa: this.kepalaDesa,
                     jumlahPenduduk: this.jumlah,

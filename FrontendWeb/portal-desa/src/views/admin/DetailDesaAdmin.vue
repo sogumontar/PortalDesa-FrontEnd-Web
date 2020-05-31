@@ -75,7 +75,7 @@
         }, devServer: {
             proxy: {
                 '^/api/': {
-                    target: "http://localhost:9000/desa/+'this.$route.params.sku'",
+                    target: "https://portal-desa.herokuapp.com/desa/+'this.$route.params.sku'",
                     changeOrigin: true
                 }
             }
@@ -85,11 +85,11 @@
         },
         methods: {
             async load() {
-                const response = await axios.get('http://localhost:9000/desa/' + this.$route.params.sku)
+                const response = await axios.get('https://portal-desa.herokuapp.com/desa/' + this.$route.params.sku)
                 this.desa = response.data
-                const responses = await axios.get('http://localhost:9000/desa/' + this.$route.params.sku)
+                const responses = await axios.get('https://portal-desa.herokuapp.com/desa/' + this.$route.params.sku)
                 this.skuDesa = responses.data.skuAdmin
-                const responsess = await axios.get('http://localhost:9000/produk/skuDesa/' + this.skuDesa)
+                const responsess = await axios.get('https://portal-desa.herokuapp.com/produk/skuDesa/' + this.skuDesa)
                 this.produk = responsess.data
                 console.log(responsess.data)
             }

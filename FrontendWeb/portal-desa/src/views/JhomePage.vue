@@ -1,29 +1,21 @@
 <template>
     <b-container class="mt-4">
         <b-row>
-            <b-col xl="8">
+            <b-col>
                 <p id="judul">Selamat datang di Aplikasi Portal Desa.</p>
                 <p>Aplikasi dari Kabupaten Toba yang menyediakan informasi setiap
                     desa yang terdapat di Kabupaten Toba</p>
             </b-col>
         </b-row>
         <hr>
-        <div right v-if="kecamatan.length!=0">
-            <b-row v-if="authenticated" class="">
+        <div v-if="kecamatan.length!=0">
+            <b-row class="">
                     <b-col cols="12" col lg="4" sm="12" md="6" class="p-4" v-for="kecamatan in kecamatan.slice(batasbawah, batasatas)" :key="kecamatan.sku">
                         <router-link  :to="'/detailKecamatan/'+kecamatan.nama"><h5>{{kecamatan.nama}}</h5></router-link>
                         <b-img rounded=""
-                               src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Kecamatan_Balige%2C_Toba_Samosir_02.jpg"
-                               fluid></b-img>
+                               :src="'https://portal-desa.herokuapp.com/kecamatan/get/'+kecamatan.nama+'.jpg'"
+                               fluid width="500px" height="500px"></b-img>
                     </b-col>
-            </b-row>
-            <b-row v-else class="">
-                <b-col cols="12" col lg="4" sm="12" md="6" class="p-4" v-for="kecamatan in kecamatan.slice(batasbawah, batasatas)" :key="kecamatan.sku">
-                    <h5>{{kecamatan.nama}}</h5>
-                    <b-img rounded=""
-                           src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Kecamatan_Balige%2C_Toba_Samosir_02.jpg"
-                           fluid></b-img>
-                </b-col>
             </b-row>
         </div>
         <div v-else>

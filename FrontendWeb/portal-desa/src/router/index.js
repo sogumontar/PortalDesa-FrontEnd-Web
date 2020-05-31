@@ -16,6 +16,13 @@ import DetailDesaAdmin from "../views/admin/DetailDesaAdmin";
 import DetailProdukPage from "../views/DetailProdukPage";
 import FormBeliProduk from "../views/form/FormBeliProduk";
 import DaftarPesananCustomer from "../views/customer/DaftarPesananCustomer";
+import KeranjangPage from "../views/KeranjangPage";
+import JpenginapanPage from "../views/JpenginapanPage";
+import JformTambahPenginapan from "../views/form/JformTambahPenginapan";
+import JdetailPenginapanPage from "../views/JdetailPenginapanPage";
+import JdetailDesa from "../views/JdetailDesa";
+import ProductPerMerchant from "../views/ProductPerMerchant";
+import PenginapanPerMerchant from "../views/PenginapanPerMerchant";
 
 Vue.use(VueRouter);
 
@@ -24,6 +31,21 @@ const routes = [
     path: "/",
     name: "Home",
     component: JhomePage
+  },
+  {
+    path: "/penginapanPerMerchant/:sku",
+    name: "PenginapanPerMerchant",
+    component: PenginapanPerMerchant
+  },
+  {
+    path: "/productPerMerchant/:sku",
+    name: "ProductPerMerchant",
+    component: ProductPerMerchant
+  },
+  {
+    path: "/keranjang",
+    name: "keranjang",
+    component: KeranjangPage
   },
   {
     path: "/daftarPesanan",
@@ -108,6 +130,26 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue")
+  }, 
+  {
+    path: "/penginapan",
+    name: "JpenginapanPage",
+    component: JpenginapanPage
+  },
+  {
+    path: "/penginapan/create",
+    name: "JformTambahPenginapan",
+    component: JformTambahPenginapan
+  },
+  {
+    path: "/penginapan/detail",
+    name: "JdetailPenginapanPage",
+    component: JdetailPenginapanPage
+  },
+  {
+    path: "/detailDesa/:sku",
+    name: "JdetailDesa",
+    component: JdetailDesa
   }
 ];
 

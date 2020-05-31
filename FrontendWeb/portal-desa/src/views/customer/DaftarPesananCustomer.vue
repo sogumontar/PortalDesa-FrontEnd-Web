@@ -104,7 +104,7 @@
                 var vm = this;
                 reader.onload = (e) => {
                     vm.image = e.target.result;
-                    axios.put('http://localhost:9000/transaksi/bayar/'+this.selected, {
+                    axios.put('https://portal-desa.herokuapp.com/transaksi/bayar/'+this.selected, {
                         resi : reader.result,
                         skuCustomer : localStorage.getItem("sku")
                     }).then(
@@ -116,19 +116,19 @@
             },
             async tab1(){
                 this.tab=1
-                const response = await axios.get('http://localhost:9000/transaksi/sku/cart/' + this.sku)
+                const response = await axios.get('https://portal-desa.herokuapp.com/transaksi/sku/cart/' + this.sku)
                 this.data=response.data
                 console.log(this.data)
             },
             async tab2(){
                 this.tab=2
-                const response = await axios.get('http://localhost:9000/transaksi/sku/pesan/' + this.sku)
+                const response = await axios.get('https://portal-desa.herokuapp.com/transaksi/sku/pesan/' + this.sku)
                 this.data=response.data
                 console.log(this.data[0])
             },
             async tab3(){
                 this.tab=3
-                const response = await axios.get('http://localhost:9000/transaksi/sku/bayar/' + this.sku)
+                const response = await axios.get('https://portal-desa.herokuapp.com/transaksi/sku/bayar/' + this.sku)
                 this.data=response.data
             },
             formSubmit(){
