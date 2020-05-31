@@ -155,9 +155,10 @@
                 var vm = this;
                 reader.onload = (e) => {
                     vm.image = e.target.result;
-                    axios.post('https://portal-desa.herokuapp.com/produk/add/gambar', {
+                    console.log(e.target.result)
+                    axios.post('http://localhost:9000/produk/update/gambar', {
                         gambar : reader.result,
-                        nama : localStorage.getItem("sku")
+                        nama : "/produk/get/PINT-0001-18.png"
                     }).then(
                         alert("Add Desa Pict success")
                         // this.$router.push({name: 'daftarAdmin'})
