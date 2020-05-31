@@ -20,6 +20,7 @@ import KeranjangPage from "../views/KeranjangPage";
 import JpenginapanPage from "../views/JpenginapanPage";
 import JformTambahPenginapan from "../views/form/JformTambahPenginapan";
 import JdetailPenginapanPage from "../views/JdetailPenginapanPage";
+import JdetailDesa from "../views/JdetailDesa";
 
 Vue.use(VueRouter);
 
@@ -132,6 +133,11 @@ const routes = [
     path: "/penginapan/detail",
     name: "JdetailPenginapanPage",
     component: JdetailPenginapanPage
+  },
+  {
+    path: "/detailDesa/:sku",
+    name: "JdetailDesa",
+    component: JdetailDesa
   }
 ];
 

@@ -71,12 +71,11 @@
 
                         <b-row>
                             <b-col>
-                                <router-link :to="'/detailDesaAdmin/'+produk.nama">Lihat Detail Desa</router-link>
+                                <router-link :to="'/detailDesa/'+produk.nama">Lihat Detail Desa</router-link>
                             </b-col>
                         </b-row>
 
-                    </b-col>
-                </b-row>
+                    </b-col>                </b-row>
             </b-col>
         </b-row>
 
