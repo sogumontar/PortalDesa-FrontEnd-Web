@@ -13,8 +13,8 @@
                     </b-nav>
                 </template>
                 <div>
-                    <p v-if="data.length===0 && tab==1">Keranjang Anda Kosong</p>
-                    <p v-if="data.length===0 && tab==2">Tidak Ada Pesanan</p>
+                    <p v-if="data.length===0 && tab===1">Keranjang Anda Kosong</p>
+                    <p v-if="data.length===0 && tab===2">Tidak Ada Pesanan</p>
                     <b-card-text v-for="data in data" :key="data.sku">
                         <p>Nama : {{data[5]}}</p>
                         <p>Alamat Pengiriman : {{data[2]}}</p>

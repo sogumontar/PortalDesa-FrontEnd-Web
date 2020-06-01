@@ -23,6 +23,7 @@ import JdetailPenginapanPage from "../views/JdetailPenginapanPage";
 import JdetailDesa from "../views/JdetailDesa";
 import ProductPerMerchant from "../views/ProductPerMerchant";
 import PenginapanPerMerchant from "../views/PenginapanPerMerchant";
+import JartikelPage from "../views/JartikelPage";
 
 Vue.use(VueRouter);
 
@@ -33,12 +34,12 @@ const routes = [
     component: JhomePage
   },
   {
-    path: "/penginapanPerMerchant/:sku",
+    path: "/penginapanPerMerchant/:namaDesa/:skuMerchant",
     name: "PenginapanPerMerchant",
     component: PenginapanPerMerchant
   },
   {
-    path: "/productPerMerchant/:sku",
+    path: "/productPerMerchant/:namaDesa/:skuProduk",
     name: "ProductPerMerchant",
     component: ProductPerMerchant
   },
@@ -150,6 +151,11 @@ const routes = [
     path: "/detailDesa/:sku",
     name: "JdetailDesa",
     component: JdetailDesa
+  },
+  {
+    path: "/detailDesa/artikel/:sku",
+    name: "JartikelPage",
+    component: JartikelPage
   }
 ];
 
