@@ -11,7 +11,7 @@
                 <b-col cols="8" col md="5" lg="4" sm="7">
                     <b-form-input
                             id="input-nama"
-                            v-model="form.namaPenginapan"
+                            v-model="namaPenginapan"
                             required
                             type="text"
                     ></b-form-input>
@@ -28,7 +28,7 @@
                 <b-col cols="8" col md="5" lg="4" sm="7">
                     <b-form-textarea
                             id="input-deskripsi"
-                            v-model="form.deskripsiPenginapan"
+                            v-model="deskripsiPenginapan"
                             required
                             rows="4"
                             size="lg"
@@ -38,15 +38,15 @@
 
             <b-form-row class="justify-content-sm-center mt-3">
                 <b-col cols="3" col md="2" sm="2" lg="2" class="mt-2">
-<!--                    <p>Foto Penginapan</p>-->
+                    <!--                    <p>Foto Penginapan</p>-->
                 </b-col>
                 <b-col cols="auto" col md="auto" lg="auto" sm="auto" class="mt-2">
-<!--                    <p>:</p>-->
+                    <!--                    <p>:</p>-->
                 </b-col>
                 <b-col cols="8" col md="5" lg="4" sm="7">
                     <b-form-file
                             id="input-foto"
-                            v-model="form.gambarPenginapan"
+                            v-model="gambarPenginapan"
                             required
                             placeholder="Pilih Foto Penginapan"
                             drop-placeholder="Pilih Foto"
@@ -64,7 +64,7 @@
                 <b-col cols="8" col md="5" lg="4" sm="7">
                     <b-form-textarea
                             id="input-deskripsi"
-                            v-model="form.lokasiPenginapan"
+                            v-model="lokasiPenginapan"
                             required
                             rows="4"
                             size="lg"
@@ -82,7 +82,7 @@
                 <b-col cols="8" col md="5" lg="4" sm="7">
                     <b-form-input
                             id="input-nama"
-                            v-model="form.hargaPenginapan"
+                            v-model="hargaPenginapan"
                             placeholder="Rp. "
                             required
                             type="text"
@@ -100,7 +100,7 @@
                 <b-col cols="8" col md="5" lg="4" sm="7">
                     <b-form-input
                             id="input-nama"
-                            v-model="form.jumlahKamar"
+                            v-model="jumlahKamar"
                             required
                             type="number"
                     ></b-form-input>
@@ -115,24 +115,47 @@
 </template>
 
 <script>
+    import axios from "axios";
     export default {
         name: "JformTambahPenginapan",
-        data(){
-            return{
-                form: {
-                    namaPenginapan : "",
-                    deskripsiPenginapan : "",
-                    alamatPenginapan : "",
-                    gambarPenginapan : "",
-                    hargaPenginapan : "",
-                    jumlahKamar : "",
+        data() {
+            return {
+                namaPenginapan: "",
+                deskripsiPenginapan: "",
+                alamatPenginapan: "",
+                gambarPenginapan: "",
+                hargaPenginapan: "",
+                jumlahKamar: "",
 
-                }
             }
+
         },
         methods: {
-            addPenginapan(){
-                console.log("Tersimpan")
+            async addPenginapan() {
+                axios.post('https://portal-desa.herokuapp.com/penginapan/add', {
+                    nama: this.nama,
+                    harga: this.harga,
+                    deskripsi: this.deskripsi,
+                    skuDesa: localStorage.getItem("sku")
+                }, error => {
+                    console.error(error);
+                })
+                    // eslint-disable-next-line no-unused-vars
+                    .then(function (response) {
+
+                        alert("Tambah Produk Sukses"),
+                            window.location.href = "/produk"
+                        // this.$router.go('ProductPage')
+                    })
+                    .then(function () {
+                        this.$router.push({name: 'ProductPage'})
+                    })
+                    .then(function () {
+                        console.log("telah ke sini")
+                    })
+                    .catch(function (err) {
+                        currentObj.output = err;
+                    });
             },
         }
     }

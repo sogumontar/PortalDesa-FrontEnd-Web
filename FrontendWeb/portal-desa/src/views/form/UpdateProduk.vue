@@ -1,6 +1,6 @@
 <template>
     <b-container class="mb-5">
-        <h1>Create Produk</h1>
+        <h1>Update Produk</h1>
         <b-form @submit="formSubmit" class="mt-3">
             <b-form-row class="justify-content-sm-center">
                 <b-col cols="3" col md="2" sm="2" lg="1" class="mt-2">
@@ -67,8 +67,8 @@
                             <input type="file" @change="onFileChange">
                         </div>
                         <div v-else>
-                            <img :src="gambar" width="120" height="100" />
-                            <button @click="removeImage">Remove image</button>
+                            <img :src="'https://portal-desa.herokuapp.com'+gambar" width="120" height="100" />
+                            <input type="file" @change="onFileChange">
                         </div>
                     </div>
                 </b-col>
@@ -82,7 +82,7 @@
 
                 </b-col>
                 <b-col col md="auto" lg="auto" class="mt-3">
-                    <button type="submit" id="tombol-daftar" class="pl-3 pr-3 btn btn-primary">Simpan</button>
+                    <button type="submit" id="tombol-daftar" class="pl-3 pr-3 btn btn-primary">Ubah</button>
                 </b-col>
             </b-form-row>
         </b-form>
@@ -90,25 +90,35 @@
 </template>
 
 <script>
-
     import axios from "axios";
 
     export default {
+        name: "UpdateProduk",
         mounted() {
-            console.log('Component mounted.')
+           this.load()
         },
-        data() {
-            return {
+        data(){
+            return{
+                sku: this.$route.params.sku,
+                detail : '',
                 nama: '',
                 harga: '',
                 deskripsi: '',
                 gambar: '',
                 selectedFile : null,
-            };
+            }
         },
         methods: {
-            uploadImage(event){
-                this.selectedFile = event.target.files[0].name
+            async load() {
+                const response = await axios.get('https://portal-desa.herokuapp.com/produk/sku/' + this.$route.params.sku)
+                this.detail = response.data
+                console.log(this.detail)
+                this.nama =this.detail.nama
+                this.deskripsi =this.detail.deskripsi
+                this.harga =this.detail.harga
+                this.gambar =this.detail.gambar
+
+                console.log(this.detail)
             },
             async formSubmit(e) {
                 console.log(this.nama)
@@ -116,7 +126,7 @@
                 console.log(this.deskripsi)
                 e.preventDefault();
                 let currentObj = this;
-                axios.post('https://portal-desa.herokuapp.com/produk/add', {
+                axios.put('https://portal-desa.herokuapp.com/produk/update/' + this.$route.params.sku, {
                     nama: this.nama,
                     harga: this.harga,
                     deskripsi: this.deskripsi,
@@ -127,7 +137,7 @@
                     // eslint-disable-next-line no-unused-vars
                     .then(function (response) {
 
-                        alert("Tambah Produk Sukses"),
+                        alert("Update Sukses"),
                             window.location.href = "/produk"
                         // this.$router.go('ProductPage')
                     })
@@ -156,11 +166,11 @@
                 reader.onload = (e) => {
                     vm.image = e.target.result;
                     console.log(e.target.result)
-                    axios.post('https://portal-desa.herokuapp.com/produk/add/gambar', {
-                        gambar : reader.result,
-                        nama : localStorage.getItem('sku')
+                    axios.post('https://portal-desa.herokuapp.com/produk/update/gambar', {
+                        gambar: reader.result,
+                        nama: this.detail.gambar
                     }).then(
-                        alert("Add Desa Pict success")
+                        alert("Add gambar success")
                         // this.$router.push({name: 'daftarAdmin'})
                     )
                 };

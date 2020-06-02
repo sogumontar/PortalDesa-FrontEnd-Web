@@ -12,7 +12,7 @@
 
                     <b-col lg="auto p-4">
                         <b-img
-                                src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Kecamatan_Balige%2C_Toba_Samosir_02.jpg"
+                                :src="'https://portal-desa.herokuapp.com'+produk.gambar"
                                 fluid
                                 width="300px">
                         </b-img>

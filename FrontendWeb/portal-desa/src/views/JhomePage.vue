@@ -51,49 +51,41 @@
         </div>
 
         <hr>
-        <p id="judul-desa-populer" class="p-2">Desa Populer</p>
+        <p id="judul-desa-populer" class="p-2">Produk Pospuler</p>
         <b-row class="p-2 pb-4">
             <b-col cols="12" col lg="6" sm="12" md="6">
                 <b-img rounded=""
-                       src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Kecamatan_Balige%2C_Toba_Samosir_02.jpg"
+                       width="200px"
+                       height="500px"
+                       align="center"
+                       :src="'https://portal-desa.herokuapp.com'+popular.gambar"
                        fluid></b-img>
             </b-col>
             <b-col>
                 <table id="table">
                     <tr>
-                        <td>Nama Desa</td>
+                        <td>Nama Produk</td>
                         <td>:</td>
-                        <td>Desa Meat</td>
+                        <td>{{popular.nama}}</td>
                     </tr>
                     <tr>
-                        <td>Kepala Desa</td>
+                        <td>Harga</td>
                         <td>:</td>
-                        <td>Arta Napitupulu</td>
+                        <td>{{popular.harga}}</td>
                     </tr>
                     <tr>
-                        <td>Lokasi</td>
+                        <td>Jumlah Pembelian</td>
                         <td>:</td>
-                        <td>Jalan Sisingamangaraja 19</td>
+                        <td>{{popular.jumlahPembelian}}</td>
                     </tr>
-                    <tr>
-                        <td>Produk</td>
-                        <td>:</td>
-                        <td>
-                            <li>Singkong</li>
-                            <li>Kopi</li>
-                            <li>Tas Rajutan</li>
-                        </td>
-                    </tr>
+
                 </table>
             </b-col>
         </b-row>
         <b-row class="p-4">
-            <p>Deskripsi: Desa Meat berlokasi di kecamatan balige, desa ini sering digubakan sebagai tempat untuk
-                berkemah
-                oleh para masyarakat dari luar kota maupun dari dalam daerah. Hampir setiap minggu tempat ini ramai
-                digunakan
-                sebagai tempat berkemah.</p>
+            <p><b>Deskripsi</b>:{{popular.deskripsi}}</p>
         </b-row>
+        <br><br><br>
     </b-container>
 </template>
 
@@ -123,17 +115,24 @@
                 authenticated: val,
                 kecamatan: [],
                 test: 1,
-                val:1
+                val:1,
+                popular :[]
             }
         },
         async mounted() {
             this.load()
+            this.loadPopular()
         },
         methods: {
             async load() {
                 const response = await axios.get('https://portal-desa.herokuapp.com/kecamatan/')
                 this.kecamatan = response.data
                 this.val=(Math.ceil(this.kecamatan.length/6))
+            },
+            async loadPopular() {
+                const response = await axios.get('https://portal-desa.herokuapp.com/produk/popular/')
+                this.popular = response.data
+                console.log(this.popular)
             },
             tambah (current){
                 console.log(current)

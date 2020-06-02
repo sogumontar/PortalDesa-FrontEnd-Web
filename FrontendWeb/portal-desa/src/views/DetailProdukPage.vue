@@ -21,7 +21,13 @@
                         <p>Deskripsi : <br>{{produk.deskripsi}}</p>
                     </b-col>
             </b-row>
-            <div class="tombol">
+            <div class="tombol" v-if="role === 'ROLE_MERCHANT'">
+                <b-row class="justify-content-md-center justify-content-lg-center justify-content-sm-center">
+                  <b-btn @click="hapus" class="btn btn-danger mr-3">Hapus</b-btn>
+                    <button  class="btn btn-primary"><router-link :to="'/updateProduk/'+produk.sku">Update</router-link></button>
+                </b-row>
+            </div>
+            <div class="tombol" v-else-if="role === 'ROLE_USER'">
                 <b-row class="justify-content-md-center justify-content-lg-center justify-content-sm-center">
                     <h4><b-icon-dash-circle class="mt-1" @click="kurang_jumlah"></b-icon-dash-circle><b-icon-dash></b-icon-dash></h4>
                     <h5><p class="metric-tarif">{{ jumlah }}</p></h5>
@@ -78,6 +84,7 @@
                 skuDesa: '',
                 harga: 0,
                 skuCustomer: '',
+                role : localStorage.getItem('role'),
                 idProduk: ''
             }
         }, async mounted() {
@@ -111,6 +118,12 @@
                     skuDesa: this.produk.skuDesa,
                     harga: this.produk.harga
                 }).then(this.$router.push('/keranjang'))
+
+                console.log(response)
+            },
+            async hapus(){
+                const response = await axios.put('https://portal-desa.herokuapp.com/produk/delete/'+ this.$route.params.sku)
+                    .then(window.location.href= "/produk")
 
                 console.log(response)
             }

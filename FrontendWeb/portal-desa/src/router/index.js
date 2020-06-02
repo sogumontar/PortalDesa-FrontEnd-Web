@@ -24,6 +24,11 @@ import JdetailDesa from "../views/JdetailDesa";
 import ProductPerMerchant from "../views/ProductPerMerchant";
 import PenginapanPerMerchant from "../views/PenginapanPerMerchant";
 import JartikelPage from "../views/JartikelPage";
+import ArtikelPage from "../views/ArtikelPage";
+import BeritaPage from "../views/BeritaPage";
+import PengumumanPage from "../views/PengumumanPage";
+import UpdateProduk from "../views/form/UpdateProduk";
+
 
 Vue.use(VueRouter);
 
@@ -32,6 +37,26 @@ const routes = [
     path: "/",
     name: "Home",
     component: JhomePage
+  },
+  {
+    path: "/updateProduk/:sku",
+    name: "UpdateProduk",
+    component: UpdateProduk
+  },
+  {
+    path: "/pengumuman",
+    name: "Pengumuman",
+    component: PengumumanPage
+  },
+  {
+    path: "/berita",
+    name: "Berita",
+    component: BeritaPage
+  },
+  {
+    path: "/artikel",
+    name: "ArtikelPage",
+    component: ArtikelPage
   },
   {
     path: "/penginapanPerMerchant/:namaDesa/:skuMerchant",
@@ -156,6 +181,11 @@ const routes = [
     path: "/detailDesa/artikel/:sku",
     name: "JartikelPage",
     component: JartikelPage
+  },
+  {
+    path: "/artikelAll/",
+    name: "Artikel",
+    component: ArtikelPage
   }
 ];
 
