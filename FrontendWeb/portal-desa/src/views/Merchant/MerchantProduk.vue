@@ -11,11 +11,11 @@
         <b-row class="baris-produk justify-content-md-center justify-content-lg-center justify-content-sm-center">
             <b-col class="metric-tarif p-4 m-3 mr-5" v-for="produk in produk.slice(batasbawah, batasatas)" :key="produk.sku" cols="10" col lg="3" sm="8" md="4">
                 <router-link :to="'/detailProduk/'+produk.sku">
-                <b-img
-                        rounded=""
-                        :src="'https://portal-desa.herokuapp.com'+produk.gambar"
-                        fluid
-                        class="gambar-produk"></b-img>
+                    <b-img
+                            rounded=""
+                            :src="'https://portal-desa.herokuapp.com'+produk.gambar"
+                            fluid
+                            class="gambar-produk"></b-img>
                 </router-link>
                 <hr>
                 <h5>Nama: {{ produk.nama }}</h5>
@@ -62,18 +62,13 @@
             async load() {
                 if(localStorage.getItem('token')){
                     this.role=localStorage.getItem("role")
+                }else{
+                    alert("Silahkan Login Terlebih Dahulu")
+                    this.$router.push({name: 'Login'})
                 }
-                // else{
-                //     alert("Silahkan Login Terlebih Dahulu")
-                //     this.$router.push({name: 'Login'})
-                // }
-                // const response = await axios.get('https://portal-desa.herokuapp.com/produk/skuDesa/'+localStorage.getItem("sku"))
-                // this.produk = response.data
-                // const responses = await axios.get('https://portal-desa.herokuapp.com/desa/desa/skuAdmin/'+localStorage.getItem("sku"))
 
-                    const response = await axios.get('https://portal-desa.herokuapp.com/produk/')
+                    const response = await axios.get('https://portal-desa.herokuapp.com/produk/skuDesa/'+localStorage.getItem("sku"))
                     this.produk = response.data
-
 
                 const responses = await axios.get('https://portal-desa.herokuapp.com/desa/desa/skuAdmin/'+localStorage.getItem("sku"))
                 this.detail=responses.data
