@@ -2,16 +2,19 @@
     <b-container class="mt-4">
         <h1 class="judul mt-3">Penginapan</h1>
         <hr>
-        <div class="search-wrapper panel-heading col-sm-12">
-            <input class="form-control" type="text" v-model="searchQuery" placeholder="Search" />
-        </div>
-        <b-row>
+        <b-row class="container">
             <b-col>
-                <router-link to="/penginapan/create" class="btn btn-primary" v-if="merchant">Tambah Penginapan
+                <router-link to="/penginapan/create" class="btn btn-secondary" v-if="merchant">
+                    Tambah Penginapan
                 </router-link>
                 <!--                <b-button variant="primary"><b-icon-plus></b-icon-plus> Tambah Penginapan</b-button>-->
             </b-col>
         </b-row>
+        <br><br>
+        <div class="search-wrapper panel-heading col-sm-12">
+            <input class="form-control" type="text" v-model="searchQuery" placeholder="Search"/>
+        </div>
+
         <div right v-if="penginapan.length!==0">
             <b-row class="">
                 <b-col cols="12" col lg="4" sm="12" md="6" class="p-4"
@@ -106,7 +109,7 @@
             }
             return {
                 penginapan: [],
-                searchQuery:'',
+                searchQuery: '',
                 populer: [
                     {
                         'nama': 'Penginapan 1',
@@ -131,13 +134,13 @@
             }
         },
         computed: {
-            filteredResources (){
-                if(this.searchQuery){
-                    return this.penginapan.filter((penginapan)=>{
+            filteredResources() {
+                if (this.searchQuery) {
+                    return this.penginapan.filter((penginapan) => {
                         return this.searchQuery.toLowerCase().split(' ').every(v => penginapan.nama.toLowerCase().includes(v))
                         // return item.nama.startsWith(this.searchQuery);
                     })
-                }else{
+                } else {
                     return this.penginapan;
                 }
             }

@@ -7,7 +7,7 @@
             <h1>Data Produk</h1>
         </div>
         <router-link v-if="role=='ROLE_MERCHANT'" to="" class="container">
-            <b-btn @click="check" class="btn btn-primary">Create produk</b-btn>
+            <b-btn @click="check" class="btn btn-primary">Tambah produk</b-btn>
         </router-link>
         <br><br>
         <div class="search-wrapper panel-heading col-sm-12">

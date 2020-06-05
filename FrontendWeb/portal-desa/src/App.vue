@@ -18,10 +18,10 @@
                 <b-navbar-nav class="ml-auto mt-1">
                     <b-navbar-nav class="mr-4">
                         <b-nav-item v-if="role!='ROLE_ADMIN'">
-                            <router-link to="/produk">Produk</router-link>
+                            <router-link to="/desa">Desa</router-link>
                         </b-nav-item>
                         <b-nav-item v-if="role!='ROLE_ADMIN'">
-                            <router-link to="/desa">Desa</router-link>
+                            <router-link to="/produk">Produk</router-link>
                         </b-nav-item>
                         <b-nav-item v-if="role!='ROLE_ADMIN'">
                             <router-link to="/penginapan">Penginapan</router-link>
