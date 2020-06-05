@@ -17,7 +17,7 @@
                     </thead>
                     <tbody>
                     <tr v-for="item in filteredResources" :key="item.nama">
-                        <td><a v-bind:href="item.uri" target="_blank">{{item.nama}}</a></td>
+                        <td><a v-bind:href="item.nama" target="_blank">{{item.nama}}</a></td>
                     </tr>
                     </tbody>
                 </table>
@@ -44,14 +44,24 @@
         data() {
             return {
                 searchQuery:'',
-                resources:[]
+                resources:[
+                    // {nama:"ABE Attendance",uri:"aaaa.com",category:"a",icon:null},
+                    // {nama:"Accounting Services",uri:"aaaa.com",category:"a",icon:null},
+                    // {nama:"Administration",uri:"aaaa.com",category:"a",icon:null},
+                    // {nama:"Advanced Student Lookup",uri:"bbbb.com",category:"b",icon:null},
+                    // {nama:"Art & Sciences",uri:"bbbb.com",category:"b",icon:null},
+                    // {nama:"Auxiliares Services",uri:"bbbb.com",category:"b",icon:null},
+                    // {nama:"Basic Skills",uri:"cccc.com",category:"c",icon:null},
+                    // {nama:"Board of Trustees",uri:"dddd.com",category:"d",icon:null}
+                ]
             };
         },
         computed: {
             filteredResources (){
                 if(this.searchQuery){
                     return this.resources.filter((item)=>{
-                        return item.title.startsWith(this.searchQuery);
+                        return this.searchQuery.toLowerCase().split(' ').every(v => item.nama.toLowerCase().includes(v))
+                        // return item.nama.startsWith(this.searchQuery);
                     })
                 }else{
                     return this.resources;
