@@ -97,7 +97,7 @@
             </div>
 
         </div>
-        <div v-else>
+        <div v-else-if="role === 'ROLE_USER'">
             <b-form @submit="pesanPenginapan" class="mt-5">
                 <b-form-row class="justify-content-sm-center">
                     <b-col cols="3" col md="2" sm="2" lg="2" class="mt-2">

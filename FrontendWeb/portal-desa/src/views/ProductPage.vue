@@ -6,10 +6,13 @@
         <div v-else class="judul mt-3">
             <h1>Data Produk</h1>
         </div>
+        <div class="search-wrapper panel-heading col-sm-12">
+            <input class="form-control" type="text" v-model="searchQuery" placeholder="Search" />
+        </div>
         <router-link v-if="role=='ROLE_MERCHANT'"  to=""><b-btn @click="check" class="btn btn-primary">Create produk</b-btn></router-link>
         <hr>
         <b-row class="baris-produk justify-content-md-center justify-content-lg-center justify-content-sm-center">
-            <b-col class="metric-tarif p-4 m-3 mr-5" v-for="produk in produk.slice(batasbawah, batasatas)" :key="produk.sku" cols="10" col lg="3" sm="8" md="4">
+            <b-col class="metric-tarif p-4 m-3 mr-5" v-for="produk in filteredResources.slice(batasbawah, batasatas)" :key="produk.sku" cols="10" col lg="3" sm="8" md="4">
                 <router-link :to="'/detailProduk/'+produk.sku">
                 <b-img
                         rounded=""
@@ -52,7 +55,20 @@
                 role:'',
                 test: 1,
                 batasbawah: 0,
+                searchQuery:'',
                 batasatas: 6,
+            }
+        },
+        computed: {
+            filteredResources (){
+                if(this.searchQuery){
+                    return this.produk.filter((produk)=>{
+                        return this.searchQuery.toLowerCase().split(' ').every(v => produk.nama.toLowerCase().includes(v))
+                        // return item.nama.startsWith(this.searchQuery);
+                    })
+                }else{
+                    return this.produk;
+                }
             }
         },
         async mounted() {

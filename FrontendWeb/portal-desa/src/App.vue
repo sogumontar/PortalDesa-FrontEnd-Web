@@ -9,10 +9,11 @@
             <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
             <b-collapse id="nav-collapse" is-nav>
-                <b-nav-form>
-                    <b-form-input size="sm" class="mr-sm-2" v-model="search" placeholder="Search Desa"></b-form-input>
-                    <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
-                </b-nav-form>
+                <h1 style=" margin-top: 10px;" >Portal Desa</h1>
+<!--                <b-nav-form>-->
+<!--                    <b-form-input size="sm" class="mr-sm-2" v-model="search" placeholder="Search Desa"></b-form-input>-->
+<!--                    <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>-->
+<!--                </b-nav-form>-->
 
                 <b-navbar-nav class="ml-auto mt-1">
                     <b-navbar-nav class="mr-4">
