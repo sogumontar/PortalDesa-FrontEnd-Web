@@ -80,8 +80,8 @@
                     this.$router.push({name: 'createProduk'})
                 }else{
                     alert("anda harus mengisi detail data desa terlebih dahulu")
-                    this.$router.push({path: '/detailDesa'})
-                    window.location.href="/detailDesa"
+                    this.$router.push({path: '/updateDesa/'+localStorage.getItem('sku')})
+                    window.location.href="/updateDesa/"+localStorage.getItem('sku')
                 }
             },
             kurang(){

@@ -32,6 +32,8 @@ import UpdatePenginapan from "../views/form/UpdatePenginapan";
 import MerchantPenginapan from "../views/Merchant/MerchantPenginapan";
 import MerchantProduk from "../views/Merchant/MerchantProduk";
 import Search from "../views/Search";
+import ProfilePage from "../views/ProfilePage";
+import UpdateDetailDesaForm from "../views/form/UpdateDetailDesaForm";
 
 
 Vue.use(VueRouter);
@@ -41,6 +43,16 @@ const routes = [
         path: "/",
         name: "Home",
         component: JhomePage
+    },
+    {
+        path: "/updateDesa/:sku",
+        name: "UpdateDesa",
+        component: UpdateDetailDesaForm
+    },
+    {
+        path: "/profile",
+        name: "Profile",
+        component: ProfilePage
     },
     {
         path: "/search",

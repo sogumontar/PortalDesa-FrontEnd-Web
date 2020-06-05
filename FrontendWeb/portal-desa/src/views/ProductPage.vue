@@ -7,7 +7,7 @@
             <h1>Data Produk</h1>
         </div>
         <router-link v-if="role=='ROLE_MERCHANT'" to="" class="container">
-            <b-btn @click="check" class="btn btn-primary">Tambah produk</b-btn>
+            <b-btn @click="check" class="btn btn-primary">Tambah Produk</b-btn>
         </router-link>
         <br><br>
         <div class="search-wrapper panel-heading col-sm-12">
@@ -110,8 +110,8 @@
                     this.$router.push({name: 'createProduk'})
                 } else {
                     alert("anda harus mengisi detail data desa terlebih dahulu")
-                    this.$router.push({path: '/detailDesa'})
-                    window.location.href = "/detailDesa"
+                    this.$router.push({path: '/updateDesa/'+localStorage.getItem('sku')})
+                    window.location.href="/updateDesa/"+localStorage.getItem('sku')
                 }
             },
             kurang() {

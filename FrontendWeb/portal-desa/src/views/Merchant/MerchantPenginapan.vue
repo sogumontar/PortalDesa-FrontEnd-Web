@@ -4,8 +4,7 @@
         <hr>
         <b-row>
             <b-col>
-                <router-link to="/penginapan/create" class="btn btn-primary" v-if="merchant">Tambah Penginapan
-                </router-link>
+                <b-btn v-if="merchant" @click="check" class="btn btn-primary">Tambah Penginapan</b-btn>
                 <!--                <b-button variant="primary"><b-icon-plus></b-icon-plus> Tambah Penginapan</b-button>-->
             </b-col>
         </b-row>
@@ -124,15 +123,17 @@
                 batasatas: 6,
                 test: 1,
                 merchant: check,
-                skuLogin:localStorage.getItem('sku')
+                skuLogin: localStorage.getItem('sku'),
+                detail: ''
             }
         },
         methods: {
             async load() {
-                const response = await axios.get('https://portal-desa.herokuapp.com/penginapan/bySkuAdmin/'+this.skuLogin)
+                const response = await axios.get('https://portal-desa.herokuapp.com/penginapan/bySkuAdmin/' + this.skuLogin)
                 this.penginapan = response.data
                 console.log(this.penginapan)
-
+                const responses = await axios.get('https://portal-desa.herokuapp.com/desa/desa/skuAdmin/' + localStorage.getItem("sku"))
+                this.detail = responses.data
             },
             kurang() {
                 console.log(this.test);
@@ -161,6 +162,16 @@
                 this.test = test;
                 this.batasatas = (test) * 6
                 this.batasbawah = this.batasatas - 6
+            },
+            check() {
+                if (this.detail.data.namaKepalaDesa) {
+                    window.location.href = "/penginapan/create"
+                    this.$router.push('/penginapan/create')
+                } else {
+                    alert("anda harus mengisi detail data desa terlebih dahulu")
+                    this.$router.push({path: '/updateDesa/' + localStorage.getItem('sku')})
+                    window.location.href = "/updateDesa/" + localStorage.getItem('sku')
+                }
             }
         }
     }

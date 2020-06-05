@@ -57,7 +57,7 @@
 
                     <b-nav-item-dropdown v-else-if="role === 'ROLE_MERCHANT'" right class="">
                         <b-dropdown-item>
-                            <router-link to="/">Profile</router-link>
+                            <router-link to="/profile">Profile</router-link>
                         </b-dropdown-item>
                         <b-dropdown-item>
                             <router-link to="/MerchantProduk">Produk Saya</router-link>
@@ -72,10 +72,10 @@
 
                     <b-nav-item-dropdown v-else-if="authenticated" right class="">
                         <b-dropdown-item>
-                            <router-link to="/">Profile</router-link>
+                            <router-link to="/profile">Profile</router-link>
                         </b-dropdown-item>
                         <b-dropdown-item>
-                            <router-link to="/">Pesanan</router-link>
+                            <router-link to="/admin">Pesanan</router-link>
                         </b-dropdown-item>
                         <b-dropdown-item><a v-on:click="logout" v-if="authenticated" href="/">Logout</a>
                             <router-link v-else to="/login">Login</router-link>
