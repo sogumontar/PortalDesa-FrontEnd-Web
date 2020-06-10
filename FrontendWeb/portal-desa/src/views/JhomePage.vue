@@ -1,29 +1,26 @@
 <template>
     <b-container class="mt-4">
         <b-row>
-            <b-col xl="8">
+            <b-col>
                 <p id="judul">Selamat datang di Aplikasi Portal Desa.</p>
                 <p>Aplikasi dari Kabupaten Toba yang menyediakan informasi setiap
                     desa yang terdapat di Kabupaten Toba</p>
             </b-col>
         </b-row>
         <hr>
-        <div right v-if="kecamatan.length!=0">
-            <b-row v-if="authenticated" class="">
-                    <b-col cols="12" col lg="4" sm="12" md="6" class="p-4" v-for="kecamatan in kecamatan.slice(batasbawah, batasatas)" :key="kecamatan.sku">
-                        <router-link  :to="'/detailKecamatan/'+kecamatan.nama"><h5>{{kecamatan.nama}}</h5></router-link>
+        <b-row class="justify-content-lg-center m-5">
+            <b-col cols="12" col lg="6" sm="12">
+                <input class="form-control" type="text" v-model="searchQuery" placeholder="Cari Kecamatan" />
+            </b-col>
+        </b-row>
+        <div v-if="kecamatan.length!=0">
+            <b-row class="">
+                    <b-col cols="12" col lg="4" sm="12" md="6" class="p-4" v-for="item in filteredResources.slice(batasbawah, batasatas)" :key="item.sku">
+                        <router-link  :to="'/detailKecamatan/'+item.nama"><h5>{{item.nama}}</h5></router-link>
                         <b-img rounded=""
-                               src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Kecamatan_Balige%2C_Toba_Samosir_02.jpg"
-                               fluid></b-img>
+                               :src="'https://portal-desa.herokuapp.com/kecamatan/get/'+item.nama+'.jpg'"
+                               width="300px" style="height: 200px"></b-img>
                     </b-col>
-            </b-row>
-            <b-row v-else class="">
-                <b-col cols="12" col lg="4" sm="12" md="6" class="p-4" v-for="kecamatan in kecamatan.slice(batasbawah, batasatas)" :key="kecamatan.sku">
-                    <h5>{{kecamatan.nama}}</h5>
-                    <b-img rounded=""
-                           src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Kecamatan_Balige%2C_Toba_Samosir_02.jpg"
-                           fluid></b-img>
-                </b-col>
             </b-row>
         </div>
         <div v-else>
@@ -59,49 +56,41 @@
         </div>
 
         <hr>
-        <p id="judul-desa-populer" class="p-2">Desa Populer</p>
+        <p id="judul-desa-populer" class="p-2">Produk Populer</p>
         <b-row class="p-2 pb-4">
             <b-col cols="12" col lg="6" sm="12" md="6">
                 <b-img rounded=""
-                       src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Kecamatan_Balige%2C_Toba_Samosir_02.jpg"
+                       width="200px"
+                       height="500px"
+                       align="center"
+                       :src="'https://portal-desa.herokuapp.com'+popular.gambar"
                        fluid></b-img>
             </b-col>
             <b-col>
                 <table id="table">
                     <tr>
-                        <td>Nama Desa</td>
+                        <td>Nama Produk</td>
                         <td>:</td>
-                        <td>Desa Meat</td>
+                        <td>{{popular.nama}}</td>
                     </tr>
                     <tr>
-                        <td>Kepala Desa</td>
+                        <td>Harga</td>
                         <td>:</td>
-                        <td>Arta Napitupulu</td>
+                        <td>{{popular.harga}}</td>
                     </tr>
                     <tr>
-                        <td>Lokasi</td>
+                        <td>Jumlah Pembelian</td>
                         <td>:</td>
-                        <td>Jalan Sisingamangaraja 19</td>
+                        <td>{{popular.jumlahPembelian}}</td>
                     </tr>
-                    <tr>
-                        <td>Produk</td>
-                        <td>:</td>
-                        <td>
-                            <li>Singkong</li>
-                            <li>Kopi</li>
-                            <li>Tas Rajutan</li>
-                        </td>
-                    </tr>
+
                 </table>
             </b-col>
         </b-row>
         <b-row class="p-4">
-            <p>Deskripsi: Desa Meat berlokasi di kecamatan balige, desa ini sering digubakan sebagai tempat untuk
-                berkemah
-                oleh para masyarakat dari luar kota maupun dari dalam daerah. Hampir setiap minggu tempat ini ramai
-                digunakan
-                sebagai tempat berkemah.</p>
+            <p><b>Deskripsi</b>:{{popular.deskripsi}}</p>
         </b-row>
+        <br><br><br>
     </b-container>
 </template>
 
@@ -131,17 +120,25 @@
                 authenticated: val,
                 kecamatan: [],
                 test: 1,
-                val:1
+                val:1,
+                popular :[],
+                searchQuery:'',
             }
         },
         async mounted() {
             this.load()
+            this.loadPopular()
         },
         methods: {
             async load() {
                 const response = await axios.get('https://portal-desa.herokuapp.com/kecamatan/')
                 this.kecamatan = response.data
                 this.val=(Math.ceil(this.kecamatan.length/6))
+            },
+            async loadPopular() {
+                const response = await axios.get('https://portal-desa.herokuapp.com/produk/popular/')
+                this.popular = response.data
+                console.log(this.popular)
             },
             tambah (current){
                 console.log(current)
@@ -179,10 +176,16 @@
             }
         },
         computed: {
-            rows() {
-                return this.kecamatan.length
+            filteredResources (){
+                if(this.searchQuery){
+                    return this.kecamatan.filter((item)=>{
+                        return this.searchQuery.toLowerCase().split(' ').every(v => item.nama.toLowerCase().includes(v))
+                        // return item.nama.startsWith(this.searchQuery);
+                    })
+                }else{
+                    return this.kecamatan;
+                }
             }
-
         }
     }
 

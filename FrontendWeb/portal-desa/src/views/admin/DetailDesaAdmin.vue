@@ -5,7 +5,7 @@
             <b-row class="p-2 pb-4">
                 <b-col cols="12" col lg="6" sm="12" md="6">
                     <b-img center width="450px" rounded=""
-                           src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Kecamatan_Balige%2C_Toba_Samosir_02.jpg"
+                           :src="'https://portal-desa.herokuapp.com/desa/get/'+desa.gambar"
                            fluid></b-img>
                 </b-col>
                 <b-col>
@@ -41,7 +41,7 @@
                         <h5 v-if="role=='ROLE_ADMIN'">{{produk.nama}}</h5>
                         <router-link v-else :to="'/detailProduk/'+produk.sku"><h5>{{produk.nama}}</h5></router-link>
                         <b-img width="200px" rounded=""
-                               src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Kecamatan_Balige%2C_Toba_Samosir_02.jpg"
+                               :src="'https://portal-desa.herokuapp.com/desa/get/'+produk.gambar"
                                fluid></b-img>
                         <br>
                         <p>Harga : Rp.{{produk.harga}}</p>
@@ -75,7 +75,7 @@
         }, devServer: {
             proxy: {
                 '^/api/': {
-                    target: "http://localhost:9000/desa/+'this.$route.params.sku'",
+                    target: "https://portal-desa.herokuapp.com/desa/+'this.$route.params.sku'",
                     changeOrigin: true
                 }
             }
@@ -85,11 +85,11 @@
         },
         methods: {
             async load() {
-                const response = await axios.get('http://localhost:9000/desa/' + this.$route.params.sku)
+                const response = await axios.get('https://portal-desa.herokuapp.com/desa/' + this.$route.params.sku)
                 this.desa = response.data
-                const responses = await axios.get('http://localhost:9000/desa/' + this.$route.params.sku)
+                const responses = await axios.get('https://portal-desa.herokuapp.com/desa/' + this.$route.params.sku)
                 this.skuDesa = responses.data.skuAdmin
-                const responsess = await axios.get('http://localhost:9000/produk/skuDesa/' + this.skuDesa)
+                const responsess = await axios.get('https://portal-desa.herokuapp.com/produk/skuDesa/' + this.skuDesa)
                 this.produk = responsess.data
                 console.log(responsess.data)
             }

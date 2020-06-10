@@ -47,10 +47,11 @@
                 </div>
             </b-form-row>
             <b-row class="justify-content-sm-center ">
-                <b-col cols="3" col md="2" lg="1">
-
+                <b-col cols="3" lg="auto">
+                    <br>
+                    <router-link to="/lupaPassword">Lupa Password</router-link>
                 </b-col>
-                <b-col cols="auto" col md="1" lg="1">
+                <b-col cols="auto" col md="1" lg="auto">
 
                 </b-col>
                 <b-col cols="auto" col md="auto" lg="auto" class="mt-3">
@@ -83,14 +84,15 @@
             onSubmit(e) {
                 e.preventDefault();
                 let currentObj = this;
-                const html = `<img  src="../assets/gif/25.gif" width="90px">`
-                window.load.innerHTML =html
+                // const html = `<img  src="../assets/gif/25.gif" width="90px">`
+                // window.load.innerHTML =html
                 // document.getElementById("load").append('<img src="../assets/gif/25.gif" width="90px">')
-                axios.post('http://localhost:9000/auth/signin', {
+                axios.post('https://portal-desa.herokuapp.com/auth/signin', {
                     username : this.username,
                     password : this.password
                 })
                     .then(function (response) {
+                        console.log(response)
                         var now = new Date().getTime();
                         currentObj.responses = response.data;
                         if(response.data.accessToken){
@@ -100,19 +102,19 @@
                             localStorage.setItem('nickName',response.data.nickName)
                             localStorage.setItem('setupTime',now)
                             if(response.data.role === "ROLE_MERCHANT"){
-                                window.location.href="/produk"
+                                window.location.href="/"
                             }else if(response.data.role === "ROLE_ADMIN") {
                                 window.location.href="/admin"
                             }else{
                                 window.location.href="/"
+                                // this.$router.push({name: 'home'})
                             }
                             // this.$router.push({name: 'ProductPage'})
                         }
                     })
                     // eslint-disable-next-line no-unused-vars
                     .catch(function (response) {
-                        // alert("Username atau password salah")
-                        // alert(response)
+                        alert("Username atau password salah")
                         currentObj.responses = "Login Failed, Check your username/password";
                     });
             }

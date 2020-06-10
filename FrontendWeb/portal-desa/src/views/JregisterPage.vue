@@ -154,7 +154,7 @@
                 if (this.password !== this.confirmPassword) {
                     alert("Password harus sama")
                 } else {
-                    axios.post('http://localhost:9000/auth/signup', {
+                    axios.post('https://portal-desa.herokuapp.com/auth/signup', {
                         name: this.name,
                         username: this.username,
                         email: this.email,
@@ -167,7 +167,7 @@
                         currentObj.responses = response.data;
                         if (response.data.accessToken) {
                             localStorage.setItem('token', response.data.accessToken)
-                            localStorage.setItem('role', response.data.role)
+                            localStorage.setItem('role', "ROLE_USER")
                             localStorage.setItem('sku', response.data.skuLog)
                             localStorage.setItem('nickName', response.data.nickName)
                             localStorage.setItem('setupTime', now)

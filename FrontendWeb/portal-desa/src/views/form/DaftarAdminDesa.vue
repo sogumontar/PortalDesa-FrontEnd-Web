@@ -144,7 +144,7 @@
         },
         methods: {
             async load() {
-                const response = await axios.get('http://localhost:9000/kecamatan/')
+                const response = await axios.get('https://portal-desa.herokuapp.com/kecamatan/')
                 this.kecamatan = response.data
             },
             test(){
@@ -156,7 +156,7 @@
                 if(this.password !== this.confirmPassword){
                     alert("Password harus sama")
                 } else {
-                    axios.post('http://localhost:9000/adminDev/add', {
+                    axios.post('https://portal-desa.herokuapp.com/adminDev/add', {
                         nama : this.name,
                         kecamatan : this.kec,
                         username : this.username,
