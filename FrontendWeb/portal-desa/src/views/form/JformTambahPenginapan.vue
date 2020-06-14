@@ -1,6 +1,7 @@
 <template>
     <b-container>
-        <h1>Tambah Penginapan</h1>
+        <h1 class="judul mt-3">Tambah Penginapan</h1>
+        <hr>
         <b-form  class="mt-5">
             <b-form-row class="justify-content-sm-center">
                 <b-col cols="3" col md="2" sm="2" lg="2" class="mt-2">
@@ -37,14 +38,14 @@
                 </b-col>
             </b-form-row>
 
-            <b-form-row class="justify-content-sm-center mt-3">
-                <b-col cols="3" col md="2" sm="2" lg="1" class="mt-2">
-                    <p>Gambar</p>
-                </b-col>
-                <b-col cols="auto" col md="auto" lg="auto" sm="auto" class="mt-2">
-                    <p>:</p>
-                </b-col>
-            </b-form-row>
+<!--            <b-form-row class="justify-content-sm-center mt-3">-->
+<!--                <b-col cols="3" col md="2" sm="2" lg="1" class="mt-2">-->
+<!--                    <p>Gambar</p>-->
+<!--                </b-col>-->
+<!--                <b-col cols="auto" col md="auto" lg="auto" sm="auto" class="mt-2">-->
+<!--                    <p>:</p>-->
+<!--                </b-col>-->
+<!--            </b-form-row>-->
 
             <b-form-row class="justify-content-sm-center mt-3">
                 <b-col cols="3" col md="2" sm="2" lg="2" class="mt-2">
@@ -123,10 +124,19 @@
                     ></b-form-input>
                 </b-col>
             </b-form-row>
-
         </b-form>
+        <b-form-row class="justify-content-md-center">
+            <b-col col md="4" lg="2">
 
-        <button @click="addPenginapan" class="justify-content-sm-center mt-3 mb-5 btn btn-primary">Tambah</button>
+            </b-col>
+            <b-col col md="2" lg="auto">
+
+            </b-col>
+            <b-col col md="auto" lg="auto" class="mt-3">
+                <button @click="addPenginapan" class="justify-content-sm-center mt-3 mb-5 btn btn-primary">Tambah</button>
+            </b-col>
+        </b-form-row>
+
     </b-container>
 </template>
 
@@ -202,5 +212,8 @@
 </script>
 
 <style scoped>
-
+    .judul {
+        text-align: left;
+        font-family: "Arial Black";
+    }
 </style>

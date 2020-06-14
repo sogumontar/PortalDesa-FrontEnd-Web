@@ -17,7 +17,7 @@
 
         <b-container>
             <br><br>
-            <b-btn><router-link to="/createArtikel" style="color: white">Tambah Artikel</router-link></b-btn>
+            <b-btn v-if="merchant" ><router-link to="/createArtikel" style="color: white">Tambah Artikel</router-link></b-btn>
             <b-card body-class="text-center" header-tag="nav" class="mt-5">
                 <template v-slot:header>
                     <b-nav card-header tabs>
@@ -64,11 +64,18 @@
     export default {
         name: "JartikelPage",
         data(){
+            var check = false;
+            if (localStorage.getItem('token')) {
+                if (localStorage.getItem('role') === 'ROLE_MERCHANT' && localStorage.getItem('nickName') === this.$route.params.sku) {
+                    check = true;
+                }
+            }
             return{
                 tab:1,
                 desa: [],
                 sku : '',
-                artikel :[]
+                artikel :[],
+                merchant : check
             }
         },
         async mounted(){

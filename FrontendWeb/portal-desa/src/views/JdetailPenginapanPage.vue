@@ -81,12 +81,10 @@
                 <b-col>
                     <h4>Deskripsi : </h4>
                 </b-col>
+                <b-col col lg="10">
+                    <p style="text-align: justify">{{ data.deskripsi }}</p>
+                </b-col>
             </b-row>
-            <b-col col lg="10">
-                <br><br>
-                <p style="text-align: justify">{{ data.deskripsi }}</p>
-            </b-col>
-
             <hr>
         </b-row>
         <div v-if="role === 'ROLE_MERCHANT' ">

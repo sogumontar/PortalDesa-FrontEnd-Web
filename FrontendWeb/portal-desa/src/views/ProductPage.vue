@@ -1,15 +1,12 @@
 <template>
     <b-container>
-        <div v-if="role=='ROLE_MERCHANT'">
-            <h1> Data Produk : </h1>
-        </div>
-        <div v-else class="judul mt-3">
+        <div class="judul mt-3">
             <h1>Data Produk</h1>
         </div>
-        <router-link v-if="role=='ROLE_MERCHANT'" to="" class="container">
+        <hr>
+        <router-link v-if="merchant" to="" class="container">
             <b-btn @click="check" class="btn btn-primary">Tambah Produk</b-btn>
         </router-link>
-        <hr>
         <b-row class="justify-content-lg-center m-5">
             <b-col col lg="6">
                 <input class="form-control" type="text" v-model="searchQuery" placeholder="Cari Produk" />
@@ -59,6 +56,12 @@
             }
         },
         data() {
+            var check = false;
+            if (localStorage.getItem('token')) {
+                if (localStorage.getItem('role') === 'ROLE_MERCHANT') {
+                    check = true;
+                }
+            }
             return {
                 produk: [],
                 detail: '',
@@ -67,6 +70,7 @@
                 batasbawah: 0,
                 searchQuery: '',
                 batasatas: 6,
+                merchant: check,
             }
         },
         computed: {
