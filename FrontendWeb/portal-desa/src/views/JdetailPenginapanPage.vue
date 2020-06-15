@@ -219,9 +219,9 @@
 
 <style scoped>
     .judul {
-        text-align: left;
-        font-family: "Arial Black";
-    }
+         text-align: left;
+         font-family: "Arial Black";
+     }
 
     @media only screen and (max-width: 600px) {
         .gambar-populer {

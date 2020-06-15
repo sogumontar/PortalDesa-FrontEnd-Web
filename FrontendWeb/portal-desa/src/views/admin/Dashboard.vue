@@ -1,10 +1,10 @@
 <template>
     <div class="container">
         <br>
-        <h3>Daftar Pesanan </h3>
+        <h1 style="font-family: 'Arial Black'; text-align: left">Daftar Pesanan </h1>
         <hr>
         <div>
-            <b-card body-class="text-center" header-tag="nav">
+            <b-card header-tag="nav">
                 <template v-slot:header>
                     <b-nav card-header tabs>
                         <b-nav-item v-bind:active="tab === 1" v-on:click="tab1">Pesanan Produk</b-nav-item>
@@ -16,18 +16,19 @@
                 </template>
                 <div class="card">
                     <p v-if="data.length===0 ">Tidak Ada Pesanan</p>
-                    <b-card-text v-for="data in data" :key="data.sku">
-                        <h3 v-if="tab === 2 && data.status === 4" style="color: forestgreen">Pesanan Diterima</h3>
-                        <h3 v-else-if="tab === 2 && data.status === 5" style="color: darkred">Pesanan Ditolak</h3>
-                        <h3 v-else-if="tab === 2" style="color: dodgerblue">Menunggu</h3>
-                        <h3 v-if="tab === 4 && data[0].status === 2" style="color: dodgerblue">Menunggu</h3>
-                        <h3 v-else-if="tab === 4 && data[0].status === 3" style="color: forestgreen">Pesanan
-                            Diterima</h3>
-                        <h3 v-else-if="tab === 4" style="color: darkred">Pesanan Ditolak</h3>
-                        <div v-if="tab <3">
+                    <b-card-text v-for="(data, index) in data" :key="data.sku" class="pl-4 pt-4">
+                        <h3>Pesanan {{index+1}}</h3>
+                        <h4 v-if="tab === 2 && data.status === 4" style="color: forestgreen">Pesanan Diterima</h4>
+                        <h4 v-else-if="tab === 2 && data.status === 5" style="color: darkred">Pesanan Ditolak</h4>
+                        <h4 v-else-if="tab === 2" style="color: dodgerblue">Menunggu</h4>
+                        <h4 v-if="tab === 4 && data[0].status === 2" style="color: dodgerblue">Menunggu</h4>
+                        <h4 v-else-if="tab === 4 && data[0].status === 3" style="color: forestgreen">Pesanan
+                            Diterima</h4>
+                        <h4 v-else-if="tab === 4" style="color: darkred">Pesanan Ditolak</h4>
+                        <div v-if="tab < 3">
                             <p>Alamat Tujuan : {{data.alamat}}</p>
                             <p>Metode Pembayaran : {{data.metode}}</p>
-                            <p>Harga : {{data.harga | numFormat}}</p>
+                            <p>Harga : Rp. {{data.harga | numFormat}}</p>
                             <div v-if="tab === 2">
                                 <img
                                         width="350px"
@@ -40,13 +41,13 @@
                             </div>
                         </div>
                         <div v-else-if="tab >2">
-                            <center>
-                                <img
-                                        width="450px"
-                                        align="center"
-                                        class="card"
-                                        :src="'https://portal-desa.herokuapp.com'+data[1].gambar" alt="">
-                            </center>
+                            <div style="text-align: center;">
+<!--                                <img-->
+<!--                                        width="450px"-->
+<!--                                        align="center"-->
+<!--                                        class="card"-->
+<!--                                        :src="'https://portal-desa.herokuapp.com'+data[1].gambar" alt="">-->
+                            </div>
                             <p>Penginapan Tujuan : {{data[1].nama}}</p>
                             <p>Lama Menginap : {{data[0].lamaMenginap}}</p>
                             <p>Metode : {{data[0].metode}}</p>

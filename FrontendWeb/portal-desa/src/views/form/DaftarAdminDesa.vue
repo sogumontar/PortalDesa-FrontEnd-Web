@@ -107,14 +107,14 @@
                 </b-form-row>
 
                 <b-form-row class="justify-content-md-center">
-                    <b-col col md="4" lg="2">
+                    <b-col col md="4" lg="4">
 
                     </b-col>
                     <b-col col md="auto" lg="auto" >
-
-                    </b-col>
-                    <b-col col md="auto" lg="auto" class="mt-2">
                         <button type="submit" id="tombol-daftar" class="pl-3 pr-3 btn btn-primary">Daftar</button>
+                    </b-col>
+                    <b-col col md="4" lg="4" class="mt-2">
+
                     </b-col>
                 </b-form-row>
             </b-form>
