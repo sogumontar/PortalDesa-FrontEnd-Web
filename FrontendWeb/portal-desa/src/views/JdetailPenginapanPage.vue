@@ -83,7 +83,6 @@
                 </b-col>
             </b-row>
             <b-col col lg="10">
-                <br><br>
                 <p style="text-align: justify">{{ data.deskripsi }}</p>
             </b-col>
 
@@ -93,7 +92,7 @@
 
             <div v-if=" data.skuMerchant === sku">
                 <b-btn variant="danger" @click="hapus">Hapus</b-btn>&nbsp;&nbsp;&nbsp;
-                <b-btn variant="primary"><router-link :to="'/updatePenginapan/'+this.$route.params.sku">Update</router-link></b-btn>
+                <router-link class="btn btn-primary" :to="'/updatePenginapan/'+this.$route.params.sku">Update</router-link>
             </div>
 
         </div>
@@ -212,7 +211,10 @@
             },
             async hapus(){
                 await axios.put('https://portal-desa.herokuapp.com/penginapan/delete/' + this.$route.params.sku)
-                .then(alert("Hapus Penginapan Sukses"), window.location.href="/penginapan")
+                .then((response) => {
+                    console.log(response)
+                    alert("Hapus Penginapan Sukses"), window.location.href="/penginapan"
+                })
             }
 
         }

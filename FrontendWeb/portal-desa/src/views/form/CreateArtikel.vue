@@ -1,6 +1,7 @@
 <template>
     <b-container class="mb-5">
-        <h1>Tambah Artikel</h1>
+        <h1 class="judul mt-3">Tambah Artikel</h1>
+        <hr>
         <b-form class="mt-3">
             <b-form-row class="justify-content-sm-center">
                 <b-col cols="3" col md="2" sm="2" lg="1" class="mt-2">
@@ -108,6 +109,9 @@
 
     export default {
         name: "CreateArtikel",
+        async mounted() {
+            this.load()
+        },
         data() {
             return {
                 judul: '',
@@ -115,10 +119,16 @@
                 isi: '',
                 sumber: '',
                 penulis: '',
-                sku: localStorage.getItem('sku')
+                sku: localStorage.getItem('sku'),
+                desa:''
             }
         },
         methods: {
+            async load(){
+                const response = await axios.get('https://portal-desa.herokuapp.com/desa/desa/skuAdmin/' + this.sku)
+                this.desa=response.data.data.nama
+                console.log(this.desa)
+            },
             async simpan() {
                 console.log(this.sku)
                 axios.post('https://portal-desa.herokuapp.com/artikel/add/' + this.sku, {
@@ -130,7 +140,7 @@
                 }).then((value) => {
                     console.log(value)
                     alert("Tambah Artikel Sukses")
-                    window.location.href = "/detailDesa/artikel/" + this.sku
+                    window.location.href = "/detailDesa/artikel/" + this.desa
                     // expected output: "Success!"
                 });
             }
@@ -139,5 +149,8 @@
 </script>
 
 <style scoped>
-
+    .judul {
+        text-align: left;
+        font-family: "Arial Black";
+    }
 </style>
