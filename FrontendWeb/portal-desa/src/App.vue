@@ -132,15 +132,18 @@
                 console.log(time)
                 if(time <= 30){
                     console.log("ini")
+                    console.log(Jam + hours)
                     if(Jam>hours || Menit >= parseInt(time)+30){
                         alert("Sesi anda telah habis, mohon lakukan autentikasi ulang")
                         this.logout()
                     }
                 }else{
                     console.log("bukan")
-                    if(Jam>hours || Menit>= 30-(60-parseInt(time))){
-                        alert("Sesi anda telah habis, mohon lakukan autentikasi ulang")
-                        this.logout()
+                    if(Jam>hours){
+                        if(Menit>= 30-(60-parseInt(time))) {
+                            alert("Sesi anda telah habis, mohon lakukan autentikasi ulang")
+                            this.logout()
+                        }
                     }
                 }
             }

@@ -12,7 +12,7 @@
 
                     <b-col lg="auto p-4">
                         <b-img
-                                :src="'https://portal-desa.herokuapp.com/desa/get/'+produk.gambar"
+                                :src="'https://portal-desa.herokuapp.com/desa/get/'+produk.sku+'.png'"
                                 fluid
                                 width="300px">
                         </b-img>
@@ -52,7 +52,7 @@
                                 <p>:</p>
                             </b-col>
                             <b-col cols="auto" col lg="auto">
-                                <p>{{ produk.jumlahPenduduk }}</p>
+                                <p>{{ produk.jumlahPenduduk | numFormat }} jiwa</p>
                             </b-col>
                         </b-row>
 

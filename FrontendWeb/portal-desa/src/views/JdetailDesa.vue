@@ -20,7 +20,7 @@
             <hr>
             <b-row class="justify-content-lg-center">
                 <b-col cols="12" col lg="auto" md="auto" sm="12">
-                    <b-img :src="'https://portal-desa.herokuapp.com/desa/get/'+desa.gambar" width="400px"></b-img>
+                    <b-img :src="'https://portal-desa.herokuapp.com/desa/get/'+desa.sku+'.png'" width="400px"></b-img>
 <!--                    <b-img :src="'https://portal-desa.herokuapp.com/desa/get/Default.jpg'" width="400px"></b-img>-->
                 </b-col>
 
@@ -59,7 +59,7 @@
                             <p>:</p>
                         </b-col>
                         <b-col col lg="auto" cols="auto">
-                            <p>{{desa.jumlahPenduduk}}</p>
+                            <p>{{desa.jumlahPenduduk | numFormat}} jiwa</p>
                         </b-col>
                     </b-row>
                 </b-col>
